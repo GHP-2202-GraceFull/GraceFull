@@ -22,7 +22,7 @@ export const fetchSingleProduct = (id) => {
 };
 
 //REDUCER
-export default function singleProductReducer(state = [], action) {
+export default function singleProductReducer(state = {}, action) {
   switch (action.type) {
     case SINGLE_PRODUCT:
       return action.product;
