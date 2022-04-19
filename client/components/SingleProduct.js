@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector, useSelector } from "react-redux";
+import getSingleProduct from "../store/singleProduct";
 
+const dummySingleProduct = {};
 const SingleProduct = (productId) => {
   const dispatch = useDispatch();
   const singleProduct = useSelector((state) => state.singleProduct);
