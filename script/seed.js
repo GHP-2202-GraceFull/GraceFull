@@ -2,7 +2,7 @@
 
 const {
   db,
-  models: { User },
+  models: { User, Product },
 } = require("../server/db");
 
 /**
@@ -50,16 +50,20 @@ async function seed() {
   //   User.create({ username: "cody", password: "123" }),
   //   User.create({ username: "murphy", password: "123" }),
   // ]);
-  // const products = await Promise.all(dummyProducts.map(product => ))
 
-  console.log(`seeded ${users.length} users`);
+  //Seeding Dummy Products
+  const products = await Promise.all(
+    dummyProducts.map((product) => Product.create(product))
+  );
+  console.log(`seeded ${products.length} products`);
   console.log(`seeded successfully`);
-  return {
-    users: {
-      cody: users[0],
-      murphy: users[1],
-    },
-  };
+
+  // return {
+  //   users: {
+  //     cody: users[0],
+  //     murphy: users[1],
+  //   },
+  // };
 }
 
 /*
