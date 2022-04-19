@@ -55,9 +55,11 @@ async function seed() {
   const products = await Promise.all(
     dummyProducts.map((product) => Product.create(product))
   );
+
   console.log(`seeded ${products.length} products`);
   console.log(`seeded successfully`);
 
+  //-------- BELOW: unecessary return from boilerplate code? Delete? --------
   // return {
   //   users: {
   //     cody: users[0],

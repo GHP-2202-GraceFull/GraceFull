@@ -2,8 +2,9 @@ const Sequelize = require("sequelize");
 const db = require("../db");
 
 // Create a products model with a title*, description*, price*, quantity (defaults to 0), and photo.
-// Products must belong to at least one category. see server/db/index.js for associations.
 // If there is no photo, there must be a placeholder photo used.
+
+// Products must belong to at least one category => see server/db/index.js for associations.
 
 const Product = db.define("product", {
   title: {
