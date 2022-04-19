@@ -4,7 +4,8 @@ const db = require("./db");
 
 const User = require("./models/User");
 const Product = require("./models/Product");
-//associations could go here!
+
+//TODO: associations could go here!
 //Product - Category = Many to Many
 
 module.exports = {
