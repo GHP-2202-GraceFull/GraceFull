@@ -17,16 +17,17 @@ export const fetchSingleProduct = (id) => {
     const response = await axios.get(`/api/products/${id}`);
     const singleProduct = response.data;
     const action = setSingleProduct(singleProduct);
+    console.log(action, "action in thunk creator");
     dispatch(action);
   };
 };
 
 //REDUCER
-export default function singleProductReducer(state = {}, action) {
+export default function singleProductReducer(product = {}, action) {
   switch (action.type) {
     case SINGLE_PRODUCT:
       return action.product;
     default:
-      return state;
+      return product;
   }
 }
