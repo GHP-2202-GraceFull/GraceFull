@@ -1,14 +1,17 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import getSingleProduct from "../store/singleProduct";
+import { fetchSingleProduct } from "../store/singleProduct";
 
-const SingleProduct = (productId) => {
+const SingleProduct = (props) => {
+  const studentId = props.match.params.id;
   const dispatch = useDispatch();
   const singleProduct = useSelector((state) => state.singleProduct);
+
   useEffect(() => {
-    dispatch(getSingleProduct(productId));
-  });
+    dispatch(fetchSingleProduct(studentId));
+  }, []);
+
   return (
     <div>
       <h1>{singleProduct.title}</h1>
