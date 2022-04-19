@@ -4,9 +4,10 @@ import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import auth from "./auth";
 import allProducts from "./allProducts";
+import singleProductReducer from './singleProduct';
 
 //App Reducer
-const reducer = combineReducers({ auth, allProducts });
+const reducer = combineReducers({ auth, allProducts, singleProductReducer });
 
 //Middleware
 const middleware = composeWithDevTools(
