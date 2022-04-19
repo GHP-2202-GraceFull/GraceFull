@@ -1,4 +1,5 @@
 import React, {useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllProducts } from "../store/allProducts" 
 
@@ -6,42 +7,26 @@ import { fetchAllProducts } from "../store/allProducts"
 const AllProducts = () => {
     const dispatch = useDispatch()
     const products = useSelector((state) => {
-        return state.products
+        return state.allProducts
     })
 
     useEffect(()=> {
         dispatch(fetchAllProducts())
     }, [])
 
+    console.log(products.map((product)=> product.title))
+
     return (
         <div>
-            <h1>All Products</h1>
-            <div>
-                {products.map((product) =>{
-                    <div key={product.id}>
-                        <image scr={product.image} />
-                        <h3>{product.name}</h3>
-                        <h3>{product.price}</h3>
-                    </div>
-                })}
-            </div>
+            {products.map((product)=>
+                <div>
+                <h3>{product.title}</h3>
+                <h3>${product.price}</h3>
+                <img src={product.imageUrl} />
+                </div>
+            )}
         </div>
     )
 }
 
-
 export default AllProducts;
-
-// const mapState = (state) => {
-//     return {
-//         products: state.products
-//     }
-// }
-
-// const mapDispatch = (dispatch) => {
-//     return {
-//         loadProduct: () =>dispatch(fetchProducts())
-//     }
-// }
-
-// export default connect (null, mapDispatch)(AllProducts)
