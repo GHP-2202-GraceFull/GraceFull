@@ -20,4 +20,6 @@ form div {
   display: inline-block;
 }
 
-.single
+.single-product-image {
+  width: 200px;
+}
