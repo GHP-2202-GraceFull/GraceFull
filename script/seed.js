@@ -2,7 +2,7 @@
 
 const {
   db,
-  models: { User, Product },
+  models: { User, Product, Category },
 } = require("../server/db");
 
 /**
@@ -41,6 +41,12 @@ const dummyProducts = [
   },
 ];
 
+const categories = [
+  { name: "smoothie" },
+  { name: "bowl" },
+  { name: "accessory" },
+];
+
 async function seed() {
   await db.sync({ force: true }); // clears db and matches models to tables
   console.log("db synced!");
@@ -58,6 +64,11 @@ async function seed() {
 
   console.log(`seeded ${products.length} products`);
   console.log(`seeded successfully`);
+
+  //Seeding Categories
+  const categories = await Promise.all(
+    categories.map((category) => Category.create(category))
+  );
 
   //-------- BELOW: unecessary return from boilerplate code? Delete? --------
   // return {
