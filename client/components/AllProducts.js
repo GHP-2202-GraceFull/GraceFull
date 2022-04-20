@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllProducts } from "../store/allProducts";
+import AddToCart from "./AddToCart";
 
 const AllProducts = () => {
   const [sort, setSort] = useState(null);
@@ -50,12 +51,16 @@ const AllProducts = () => {
           <option value="smoothie">Smoothies</option>
         </select>
       </label>
-      {products.map((product) => (
-        <div key={product.id}>
-          <h3>{product.title}</h3>
-          <h3>${product.price}</h3>
-          <img src={product.imageUrl} />
-          <Link to={`/products/${product.id}`}>More Info</Link>
+      {products.map((product)=>
+                <div key={product.id}>
+                <h3>{product.title}</h3>
+                <h3>${product.price}</h3>
+                <AddToCart productId = {product.id} />
+                <img src={product.imageUrl} />
+                <Link to={`/products/${product.id}`}>More Info</Link>
+
+                </div>
+            )}
         </div>
       ))}
     </div>
