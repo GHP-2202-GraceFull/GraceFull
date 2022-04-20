@@ -12,8 +12,23 @@ const User = db.define("user", {
     unique: true,
     allowNull: false,
   },
+
+  //TODO: hash password?
   password: {
     type: Sequelize.STRING,
+  },
+
+  email: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      isEmail: true,
+    },
+  },
+
+  //TODO: take out if we don't implement the rewards program
+  rewards: {
+    type: Sequelize.INTEGER,
   },
 });
 
