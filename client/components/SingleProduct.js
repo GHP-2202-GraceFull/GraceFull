@@ -6,6 +6,7 @@ import { fetchSingleProduct } from "../store/singleProduct";
 const SingleProduct = (props) => {
   const studentId = props.match.params.id;
   const dispatch = useDispatch();
+
   const singleProduct = useSelector((state) => state.singleProduct);
 
   useEffect(() => {
