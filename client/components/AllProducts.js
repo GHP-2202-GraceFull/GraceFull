@@ -21,8 +21,8 @@ const AllProducts = () => {
 
     return (
         <div>
-            <button onClick={()=> setSort("lowHigh")}>Sort: low to high</button>
-            <button onClick={()=> setSort("highLow")}>Sort: high to low</button>
+            <button onClick={()=> setSort("lowHigh")}>Price: low to high</button>
+            <button onClick={()=> setSort("highLow")}>Price: high to low</button>
             {products.map((product)=>
                 <div key={product.id}>
                 <h3>{product.title}</h3>
