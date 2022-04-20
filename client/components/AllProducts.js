@@ -21,10 +21,27 @@ const AllProducts = () => {
     ? products.sort((a, b) => b.price - a.price)
     : null;
 
+  if (filter) {
+    products.filter((product) => product.categories.includes(filter));
+  }
+
   return (
     <div>
       <button onClick={() => setSort("lowHigh")}>Price: low to high</button>
       <button onClick={() => setSort("highLow")}>Price: high to low</button>
+      <label htmlFor="filter">
+        <select
+          name="filter"
+          onChange={(event) => {
+            console.log(event.target.value); //TODO: remove console.log here
+            setFilter(event.target.value);
+          }}
+        >
+          <option value="accessory">Accessories</option>
+          <option value="bowl">Bowls</option>
+          <option value="smoothie">Smoothie</option>
+        </select>
+      </label>
       {products.map((product) => (
         <div key={product.id}>
           <h3>{product.title}</h3>
