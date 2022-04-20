@@ -15,11 +15,14 @@ const AllProducts = () => {
         dispatch(fetchAllProducts())
     }, [])
 
-    if(sort) products.sort((a,b)=> a.price-b.price)
+    sort==='lowHigh'  ? products.sort((a,b)=> a.price-b.price) 
+        : sort==='highLow' ? products.sort((a,b)=> b.price-a.price) 
+        : null;
 
     return (
         <div>
-            <button onClick={()=> setSort(true)}>Sort: low to high</button>
+            <button onClick={()=> setSort("lowHigh")}>Sort: low to high</button>
+            <button onClick={()=> setSort("highLow")}>Sort: high to low</button>
             {products.map((product)=>
                 <div key={product.id}>
                 <h3>{product.title}</h3>
