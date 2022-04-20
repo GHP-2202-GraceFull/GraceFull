@@ -2,43 +2,48 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSingleProduct } from "../store/singleProduct";
+import { addToCart } from "../store/addToCart";
 
-function Header({ itemCount }) {
-  return (
-    <header className="cartContainer">
-      <h1>GraceFull Shopping Cart</h1>
-      {/* we can insert links to Home here! */}
-      <span className="itemCount">{itemCount} items in the cart</span>
-    </header>
+const Cart = () => {
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state);
+  console.log("STATE", state);
+  const itemsInCart = useSelector((state) => state.addToCartReducer);
+
+  console.log("itemsInCart", itemsInCart);
+
+  //   useEffect(() => {
+  //     dispatch(fetchSingleProduct(productId));
+  //   }, []);
+  const total = itemsInCart.reduce(
+    (accum, item) => accum + (item.price || 0),
+    0
   );
-}
-
-const Cart = (props) => {
-  const [inCart, setInCart] = useState(props.inCart);
-
-  const itemsInCart = useSelector((state) => state.inCart);
-  const total = inCart.reduce((accum, item) => accum + (item.price || 0), 0);
 
   return (
     <div className="cart">
-      <Header />
-      <h1>Cart</h1>
-      <ol className="items-in-cart">
+      <h3>GraceFull Shopping Cart</h3>
+      <h4>
+        <span className="itemCount">
+          There are {itemsInCart.length} items in the cart
+        </span>
+      </h4>
+      <ul className="items-in-cart">
         {itemsInCart.map((item) => {
           return (
             <div key={item.id}>
               <img className="item-image" src={item.imageUrl} />
               <li>{item.title}</li>
-              <li>{item.price}</li>
-              <li>{item.quantity}</li>
+              <li>Price: ${item.price}</li>
+              <li>Quantity: {item.quantity}</li>
             </div>
           );
         })}
-      </ol>
+      </ul>
       <div className="cartSummary">
         <ul>
           <li>
-            Total <span> {total}</span>
+            Total <span> ${total}</span>
           </li>
         </ul>
       </div>
