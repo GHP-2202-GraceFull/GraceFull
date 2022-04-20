@@ -20,10 +20,15 @@ const User = db.define("user", {
 
   email: {
     type: Sequelize.STRING,
-    allowNull: false,
+    // allowNull: false,
     validate: {
       isEmail: true,
     },
+  },
+
+  admin: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
   },
 
   //TODO: take out if we don't implement the rewards program
