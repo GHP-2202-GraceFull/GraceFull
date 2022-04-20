@@ -1,7 +1,8 @@
 import React, {useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllProducts } from "../store/allProducts" 
+import { fetchAllProducts } from "../store/allProducts";
+import AddToCart from "./AddToCart";
 
 
 const AllProducts = () => {
@@ -27,6 +28,7 @@ const AllProducts = () => {
                 <div key={product.id}>
                 <h3>{product.title}</h3>
                 <h3>${product.price}</h3>
+                <AddToCart productId = {product.id} />
                 <img src={product.imageUrl} />
                 </div>
             )}
