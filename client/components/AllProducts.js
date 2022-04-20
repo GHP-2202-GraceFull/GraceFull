@@ -5,9 +5,9 @@ import { fetchAllProducts } from "../store/allProducts";
 
 const AllProducts = () => {
   const [sort, setSort] = useState(null);
-  const [filter, setFilter] = useState(null);
+  const [filter, setFilter] = useState("");
   const dispatch = useDispatch();
-  const products = useSelector((state) => {
+  let products = useSelector((state) => {
     return state.allProducts;
   });
 
@@ -21,8 +21,15 @@ const AllProducts = () => {
     ? products.sort((a, b) => b.price - a.price)
     : null;
 
-  if (filter) {
-    products.filter((product) => product.categories.includes(filter));
+  console.log(filter, "filter value before if statement"); // TODO: remove console.log
+
+  if (filter && filter !== "") {
+    products = products.filter((product) => {
+      console.log(product.categories, "product.categories");
+      const categoryNames = product.categories.map((category) => category.name);
+      console.log(categoryNames);
+      return categoryNames.includes(filter);
+    });
   }
 
   return (
@@ -33,13 +40,14 @@ const AllProducts = () => {
         <select
           name="filter"
           onChange={(event) => {
-            console.log(event.target.value); //TODO: remove console.log here
+            console.log(event.target.value);
             setFilter(event.target.value);
           }}
         >
+          <option value="">All Categories</option>
           <option value="accessory">Accessories</option>
           <option value="bowl">Bowls</option>
-          <option value="smoothie">Smoothie</option>
+          <option value="smoothie">Smoothies</option>
         </select>
       </label>
       {products.map((product) => (
