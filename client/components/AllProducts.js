@@ -51,16 +51,13 @@ const AllProducts = () => {
           <option value="smoothie">Smoothies</option>
         </select>
       </label>
-      {products.map((product)=>
-                <div key={product.id}>
-                <h3>{product.title}</h3>
-                <h3>${product.price}</h3>
-                <AddToCart productId = {product.id} />
-                <img src={product.imageUrl} />
-                <Link to={`/products/${product.id}`}>More Info</Link>
-
-                </div>
-            )}
+      {products.map((product) => (
+        <div key={product.id}>
+          <h3>{product.title}</h3>
+          <h3>${product.price}</h3>
+          <AddToCart productId={product.id} />
+          <img src={product.imageUrl} />
+          <Link to={`/products/${product.id}`}>More Info</Link>
         </div>
       ))}
     </div>
