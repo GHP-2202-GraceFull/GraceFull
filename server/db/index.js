@@ -9,6 +9,9 @@ const Category = require("./models/Category");
 //TODO: associations could go here!
 //Product - Category = Many to Many
 
+Product.belongsToMany(Category, { through: "product_categories" });
+Category.belongsToMany(Product, { through: "product_categories" });
+
 module.exports = {
   db,
   models: {

@@ -41,7 +41,7 @@ const dummyProducts = [
   },
 ];
 
-const categories = [
+const categoriesArr = [
   { name: "smoothie" },
   { name: "bowl" },
   { name: "accessory" },
@@ -58,19 +58,24 @@ async function seed() {
   // ]);
 
   //Seeding Dummy Products
-  const products = await Promise.all(
+  const [bananaBlast, berrylicious, blueberry] = await Promise.all(
     dummyProducts.map((product) => Product.create(product))
   );
 
-  console.log(`seeded ${products.length} products`);
-  console.log(`seeded successfully`);
-
   //Seeding Categories
-  const categories = await Promise.all(
-    categories.map((category) => Category.create(category))
+  const [smoothie, bowl, accessory] = await Promise.all(
+    categoriesArr.map((category) => Category.create(category))
   );
 
-  //-------- BELOW: unecessary return from boilerplate code? Delete? --------
+  await bananaBlast.addCategory(bowl);
+  await berrylicious.addCategory(bowl);
+  await blueberry.addCategory(smoothie);
+
+  //Setting Product/Category Relationships
+
+  console.log(`seeded successfully`);
+
+  //-------- TODO: unecessary return from boilerplate code? Delete? --------
   // return {
   //   users: {
   //     cody: users[0],
