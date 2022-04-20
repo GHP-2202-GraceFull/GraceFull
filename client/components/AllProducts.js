@@ -47,6 +47,7 @@ const AllProducts = () => {
           <h3>{product.title}</h3>
           <h3>${product.price}</h3>
           <img src={product.imageUrl} />
+          <Link to={`/products/${product.id}`}>More Info</Link>
         </div>
       ))}
     </div>
