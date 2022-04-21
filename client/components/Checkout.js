@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useReducer } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 // import { checkout } from "../store/checkout"
 
 
@@ -22,7 +23,14 @@ const formReducer = (state, action) => {
     }
 }
 
+
 const Checkout = () => {
+
+    const itemsInCart = useSelector((state)=> state.addToCartReducer)
+
+    const cart = !itemsInCart ? [] : itemsInCart
+
+    console.log(cart)
 
     const [formState, localDispatch ] = useReducer(formReducer, initialFormState);
 
@@ -34,7 +42,7 @@ const Checkout = () => {
         })
     }
 
-    const dispatch = useDispatch();
+    const dispatch = useDispatch(); 
 
     const handleSubmit = event => {
         event.preventDefault;
@@ -45,6 +53,16 @@ const Checkout = () => {
     return (
         <div>
             <h3>Checkout</h3>
+            <h4>{cart.length===0 ? "No items selected" : "Items"}</h4>
+            <div>
+                {cart.map((product) => {
+                    <ul key={product.id}>
+                        <li>{product.title}</li>
+                        <li>{product.price}</li>
+                    </ul>
+                })}
+                <h4>Order total: {cart.reduce((total,product)=> total+product.price)}</h4>
+            </div>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="firstName">First Name</label>
                 <input name="firstName" onChange={handleChange} value={formState.firstName} />
@@ -52,13 +70,10 @@ const Checkout = () => {
                 <label htmlFor="lastName">Last Name</label>
                 <input name="lastName" onChange={handleChange} value={formState.lastName} />
 
-                {/* <label htmlFor="lastName">Last Name</label>
-                <input name="lastName" onChange={handleChange} value={values.lastName} /> */}
-
                 <label htmlFor="email">Email</label>
                 <input name="email" onChange={handleChange} value={formState.email} />
 
-                <h3>Shipping Address</h3>
+                <h4>Shipping Address</h4>
 
                 <label htmlFor="streetAddress">Street Address</label>
                 <input name="streetAddress" onChange={handleChange} value={formState.streetAddress} />
