@@ -2,26 +2,36 @@ const Sequelize = require("sequelize");
 const db = require("../db");
 
 const Order = db.define("order", {
+    userId: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    status:{
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
     total: {
-        type: Sequelize.FLOAT,
-        allowNull: false
+        type: Sequelize.INTEGER,
+        allowNull: false,
     },
-    lineItems: {
-        type: Array,
+    email:{
+        type: Sequelize.STRING,
+        allowNull: false,
     },
-    email: {
-
+    streetAddress:{
+        type: Sequelize.STRING,
+        allowNull: false,
     },
-    shippingAddress: {
-
+    city: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    state: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    zip: {
+        type: Sequelize.STRING,
+        allowNull: false,
     }
 })
-
-//TODO associate to user || guest session
-//TODO discuss how to do line items with team
-
-//Name | Email
-
-//take addToCart reducer array and insert array into order (product title, product title, product )
-
-//loop through array and add all prices
