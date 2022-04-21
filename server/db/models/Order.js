@@ -2,6 +2,14 @@ const Sequelize = require("sequelize");
 const db = require("../db");
 
 const Order = db.define("order", {
+    userId: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    status:{
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
     total: {
         type: Sequelize.INTEGER,
         allowNull: false,
