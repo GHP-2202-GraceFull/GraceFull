@@ -7,7 +7,7 @@ const Order = db.define("order", {
     allowNull: false,
   },
   status: {
-    type: Sequelize.ENUM("CART", "ORDER"),
+    type: Sequelize.ENUM("CART", "ORDER", "SHIPPED"),
     defaultValue: "CART",
     allowNull: false,
   },
