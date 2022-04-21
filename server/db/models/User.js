@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 const db = require("../db");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const axios = require("axios");
+// const axios = require("axios");
 
 const SALT_ROUNDS = 5;
 
@@ -12,8 +12,28 @@ const User = db.define("user", {
     unique: true,
     allowNull: false,
   },
+
+  //TODO: hash password?
   password: {
     type: Sequelize.STRING,
+  },
+
+  email: {
+    type: Sequelize.STRING,
+    // allowNull: false,
+    validate: {
+      isEmail: true,
+    },
+  },
+
+  admin: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+
+  //TODO: take out if we don't implement the rewards program
+  rewards: {
+    type: Sequelize.INTEGER,
   },
 });
 

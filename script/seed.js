@@ -2,7 +2,7 @@
 
 const {
   db,
-  models: { User, Product },
+  models: { User, Product, Category },
 } = require("../server/db");
 
 /**
@@ -41,25 +41,41 @@ const dummyProducts = [
   },
 ];
 
+const categoriesArr = [
+  { name: "smoothie" },
+  { name: "bowl" },
+  { name: "accessory" },
+];
+
 async function seed() {
   await db.sync({ force: true }); // clears db and matches models to tables
   console.log("db synced!");
 
   // Creating Users
-  // const users = await Promise.all([
-  //   User.create({ username: "cody", password: "123" }),
-  //   User.create({ username: "murphy", password: "123" }),
-  // ]);
+  const users = await Promise.all([
+    User.create({ username: "cody", password: "123" }),
+    User.create({ username: "murphy", password: "123" }),
+  ]);
 
   //Seeding Dummy Products
-  const products = await Promise.all(
+  const [bananaBlast, berrylicious, blueberry] = await Promise.all(
     dummyProducts.map((product) => Product.create(product))
   );
 
-  console.log(`seeded ${products.length} products`);
+  //Seeding Categories
+  const [smoothie, bowl, accessory] = await Promise.all(
+    categoriesArr.map((category) => Category.create(category))
+  );
+
+  await bananaBlast.addCategory(bowl);
+  await berrylicious.addCategory(bowl);
+  await blueberry.addCategory(smoothie);
+
+  //Setting Product/Category Relationships
+
   console.log(`seeded successfully`);
 
-  //-------- BELOW: unecessary return from boilerplate code? Delete? --------
+  //-------- TODO: unecessary return from boilerplate code? Delete? --------
   // return {
   //   users: {
   //     cody: users[0],
