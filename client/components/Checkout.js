@@ -1,7 +1,6 @@
-import React, { useEffect, useState, useReducer } from "react";
-import { useDispatch, useSelector } from "react-redux";
-
-// import { checkout } from "../store/checkout"
+import React, { useReducer } from "react";
+import { useDispatch } from "react-redux";
+// import { checkout } from "../store/checkout" //TODO import checkout thunk from store 
 
 
 const initialFormState = {
@@ -26,11 +25,7 @@ const formReducer = (state, action) => {
 
 const Checkout = () => {
 
-    const itemsInCart = useSelector((state)=> state.addToCartReducer)
-
-    const cart = !itemsInCart ? [] : itemsInCart
-
-    console.log(cart)
+    //TODO: load line items and calculate total 
 
     const [formState, localDispatch ] = useReducer(formReducer, initialFormState);
 
@@ -47,22 +42,12 @@ const Checkout = () => {
     const handleSubmit = event => {
         event.preventDefault;
         console.log(formState)
-        // dispatch(checkout(values))
+        // dispatch(checkout(values)) //TODO dispatch checkout
     }
 
     return (
         <div>
             <h3>Checkout</h3>
-            <h4>{cart.length===0 ? "No items selected" : "Items"}</h4>
-            <div>
-                {cart.map((product) => {
-                    <ul key={product.id}>
-                        <li>{product.title}</li>
-                        <li>{product.price}</li>
-                    </ul>
-                })}
-                <h4>Order total: {cart.reduce((total,product)=> total+product.price)}</h4>
-            </div>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="firstName">First Name</label>
                 <input name="firstName" onChange={handleChange} value={formState.firstName} />
