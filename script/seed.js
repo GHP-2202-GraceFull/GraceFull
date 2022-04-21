@@ -52,10 +52,10 @@ async function seed() {
   console.log("db synced!");
 
   // Creating Users
-  // const users = await Promise.all([
-  //   User.create({ username: "cody", password: "123" }),
-  //   User.create({ username: "murphy", password: "123" }),
-  // ]);
+  const users = await Promise.all([
+    User.create({ username: "cody", password: "123" }),
+    User.create({ username: "murphy", password: "123" }),
+  ]);
 
   //Seeding Dummy Products
   const [bananaBlast, berrylicious, blueberry] = await Promise.all(
