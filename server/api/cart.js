@@ -10,6 +10,8 @@ router.get("/", async (req, res, next) => {
   //find user by token and get their cart
   try {
     const user = await User.findByToken(req.headers.authorization);
+    const cart = await user.getCart();
+    console.log("CART WORKS", cart);
     res.send(await user.getCart());
   } catch (error) {
     next(error);
