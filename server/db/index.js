@@ -5,11 +5,8 @@ const db = require("./db");
 const User = require("./models/User");
 const Product = require("./models/Product");
 const Category = require("./models/Category");
-
 const Order = require("./models/Order");
-
 const LineItem = require("./models/Lineitem");
-
 
 //TODO: associations could go here!
 //Product - Category = Many to Many
@@ -17,9 +14,21 @@ const LineItem = require("./models/Lineitem");
 Product.belongsToMany(Category, { through: "product_categories" });
 Category.belongsToMany(Product, { through: "product_categories" });
 
-//TODO: Lineitem  - Order should have associations
-// LineItem.belongsTo(Order)
-// Order.hasMany(LineItem)
+//Product - Order
+Product.belongsTo(Order);
+Order.hasMany(Product);
+
+//Lineitem  - Order
+LineItem.belongsTo(Order);
+Order.hasMany(LineItem);
+
+//Lineitem - Product
+LineItem.belongsTo(Product);
+Product.hasMany(LineItem);
+
+//User - Order
+Order.belongsTo(User);
+User.hasMany(Order);
 
 module.exports = {
   db,
@@ -27,10 +36,7 @@ module.exports = {
     User,
     Product,
     Category,
-
     Order,
-
     LineItem,
-
   },
 };

@@ -7,16 +7,16 @@ const LandingPage = () => {
         <div id="home-text">
           <div>
             <h1>The world's first ready-to-make smoothie kits.</h1>
-            <h2>
+            <p>
               No more worrying about all those bananas going bad. Get delicious
               and nutritious smoothies and smoothie bowls delivered straight to
               your door.
-            </h2>
+            </p>
           </div>
           <div>
             <button
               type="button"
-              onClick={console.log("clicked!")} // TODO: link to All Products component
+              onClick={() => console.log("clicked!")}
               className="button"
             >
               Shop All Products
