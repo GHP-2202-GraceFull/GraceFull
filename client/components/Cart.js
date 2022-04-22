@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSingleProduct } from "../store/singleProduct";
 import { addToCart } from "../store/addToCart";
+import { removeFromCart } from "../store/cart";
+import AddToCart from "./AddToCart";
+import RemoveFromCart from "./RemoveFromCart";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -45,11 +48,12 @@ const Cart = () => {
               <img className="item-image" src={item.imageUrl} />
               <li>{item.title}</li>
               <li>Price: ${item.price}</li>
-              <li>Quantity
+              <li>Quantity</li>
               <button onClick={decrementItemCount}> - </button>
               <span> {itemCount} </span>
               <button onClick={incrementItemCount}> + </button>
-              <button>Remove item from cart</button></li>
+              <AddToCart />
+              <RemoveFromCart />
             </div>
           );
         })}

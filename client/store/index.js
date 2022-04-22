@@ -6,13 +6,13 @@ import auth from "./auth";
 import allProducts from "./allProducts";
 import singleProductReducer from "./singleProduct";
 import addToCartReducer from "./addToCart";
+import cartReducer from "./cart";
 
 //App Reducer
 const reducer = combineReducers({
   auth,
-  allProducts,
   singleProduct: singleProductReducer,
-  addToCartReducer,
+  cart: cartReducer,
 });
 
 //Middleware
