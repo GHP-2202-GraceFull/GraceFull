@@ -1,9 +1,5 @@
-const router = require('express').Router();
+const router = require("express").Router();
 const User = require("../db/models/User");
-//const Order = require("../db/models/Order");
-// const Category = require("../db/models/Category");
-// const LineItem = require("../db/models/Lineitem");
-// const Product = require("../db/models/Product");
 
 // GET /api/cart
 router.get("/", async (req, res, next) => {
@@ -16,8 +12,8 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-// POST /api/addToCart
-router.post("/addToCart", async (req, res, next) => {
+// POST (Add To Cart) /api/cart
+router.post("/", async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
     res.send(await user.addToCart(req.body)); //req.body = product
@@ -26,8 +22,8 @@ router.post("/addToCart", async (req, res, next) => {
   }
 });
 
-// POST /api/removeFromCart
-router.post("/removeFromCart", async (req, res, next) => {
+// DELETE (Remove From Cart) /api/cart
+router.delete("/", async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
     res.send(await user.removeFromCart(req.body)); //req.body = product
@@ -35,6 +31,7 @@ router.post("/removeFromCart", async (req, res, next) => {
     next(error);
   }
 });
+
 //Team Note: We may want to consider middleware to replace const user = await....
 
 //We are still sorting out our Order model and methods

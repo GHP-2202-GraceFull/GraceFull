@@ -39,7 +39,7 @@ export const _updateCart = (product) => {
 
 export const _emptyCart = (product) => {
   return {
-    type: REMOVE_FROM_CART,
+    type: EMPTY_CART,
     product,
   };
 };
@@ -59,11 +59,12 @@ export const setCart = () => {
   };
 };
 
-export const addToCart = (productId) => {
+export const addToCart = (productInfo) => {
   return async (dispatch) => {
-    const response = await axios.get(`/api/cart`, {
+    const token = window.localStorage.getItem(TOKEN)
+    const response = await axios.post(`/api/cart`, productInfo, {
       headers: {
-        authorization: token
+        authorization: token,
       }
     });
     const product = response.data;
@@ -72,9 +73,10 @@ export const addToCart = (productId) => {
   };
 };
 
-export const removeFromCart = (productId) => {
+export const removeFromCart = (productInfo) => {
   return async (dispatch) => {
-    const response = await axios.get(`/api/cart`, {
+    const token = window.localStorage.getItem(TOKEN)
+    const response = await axios.delete(`/api/cart`, productInfo, {
       headers: {
         authorization: token
       }
@@ -85,9 +87,10 @@ export const removeFromCart = (productId) => {
   };
 };
 
-export const updateCart = (productId) => {
+export const updateCart = (productInfo) => {
   return async (dispatch) => {
-    const response = await axios.get(`/api/cart`, {
+    const token = window.localStorage.getItem(TOKEN)
+    const response = await axios.put(`/api/cart`, productInfo, {
       headers: {
         authorization: token
       }
@@ -98,8 +101,9 @@ export const updateCart = (productId) => {
   };
 };
 
-export const emptyCart = (productId) => {
+export const emptyCart = () => {
   return async (dispatch) => {
+    const token = window.localStorage.getItem(TOKEN)
     const response = await axios.get(`/api/cart`, {
       headers: {
         authorization: token
