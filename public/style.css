@@ -40,6 +40,7 @@ nav {
   background-color: #6b976f;
   padding: 1rem;
   align-content: center;
+  color: white;
 }
 
 #nav-logo {
@@ -75,7 +76,7 @@ nav a {
 #home-section1 {
   max-width: 100vw;
   position: relative;
-  height: 750px;
+  height: 600px;
   display: flex;
 }
 
@@ -85,14 +86,14 @@ nav a {
   /* linear-gradient(315deg, #fce0434e 0%, #fb7ba15d 74%) */
   background-image: url("https://images.unsplash.com/photo-1610450624105-58a2f25f7911?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1315&q=80");
   background-size: cover;
-  background-position: bottom;
+  background-position: center;
   z-index: -1;
 }
 
 #home-text {
   padding: 50px;
   width: 40%;
-  height: 650px;
+  height: 500px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

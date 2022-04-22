@@ -3,33 +3,38 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../store";
 
+import { FiShoppingCart } from "react-icons/fi";
+
+//TODO: connect
 const Navbar = ({ handleClick, isLoggedIn }) => (
   <div>
     {/* <h1>GraceFull</h1> */}
     <nav>
       <div id="nav-logo">
-        <Link>
+        <Link to="/home">
           ✻ Grace<i>Full</i>
         </Link>
       </div>
       {isLoggedIn ? (
         <div className="nav-links">
           {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
-          <Link to="/products">Products</Link>
-          <Link to="/cart">Cart</Link>
+          <div>
+            <a href="#" onClick={handleClick}>
+              Logout
+            </a>
+          </div>
+          <div>
+            <Link to="/products">Products</Link>
+          </div>
+          <div>
+            <Link to="/cart">Cart</Link>
+          </div>
         </div>
       ) : (
         <div className="nav-links">
           {/* The navbar will show these links before you log in */}
           <div>
-            <Link to="/login">Login</Link>
-          </div>
-          <div>
-            <Link to="/signup">Sign Up</Link>
+            <Link to="/login">Sign In</Link>
           </div>
           <div>
             <Link to="/products">Products</Link>
@@ -38,12 +43,14 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
             <Link to="/checkout">Checkout</Link>
           </div>
           <div>
-            <Link to="/cart">Cart</Link>
+            <span>0</span>
+            <Link to="/cart">
+              <FiShoppingCart />
+            </Link>
           </div>
         </div>
       )}
     </nav>
-    {/* <hr /> */}
   </div>
 );
 
