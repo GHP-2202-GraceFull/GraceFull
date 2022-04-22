@@ -28,6 +28,7 @@ router.post("/", async (req, res, next) => {
 router.delete("/", async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
+    console.log("DELETE req.body?", req.body);
     res.send(await user.removeFromCart(req.body)); //req.body = product
   } catch (error) {
     next(error);
