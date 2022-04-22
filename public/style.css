@@ -21,11 +21,6 @@ button {
   cursor: pointer;
 }
 
-nav a {
-  display: inline-block;
-  margin: 1em;
-}
-
 form div {
   margin: 1em;
   display: inline-block;
@@ -33,6 +28,41 @@ form div {
 
 .single-product-image {
   height: 300px;
+}
+
+/* NAVBAR */
+
+nav {
+  display: flex;
+  height: 30px;
+  justify-content: space-between;
+  align-content: center;
+  background-color: #6b976f;
+  padding: 1rem;
+  align-content: center;
+}
+
+#nav-logo {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 25px;
+  color: white;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: space-around;
+  width: 500px;
+  align-content: center;
+}
+
+.nav-links > div {
+  display: flex;
+  align-items: center;
+}
+
+nav a {
+  align-content: center;
+  color: white;
 }
 
 /* LANDING PAGE */

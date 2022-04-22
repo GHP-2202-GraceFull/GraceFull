@@ -7,8 +7,13 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
   <div>
     {/* <h1>GraceFull</h1> */}
     <nav>
+      <div id="nav-logo">
+        <Link>
+          ✻ Grace<i>Full</i>
+        </Link>
+      </div>
       {isLoggedIn ? (
-        <div>
+        <div className="nav-links">
           {/* The navbar will show these links after you log in */}
           <Link to="/home">Home</Link>
           <a href="#" onClick={handleClick}>
@@ -18,17 +23,27 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           <Link to="/cart">Cart</Link>
         </div>
       ) : (
-        <div>
+        <div className="nav-links">
           {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-          <Link to="/products">Products</Link>
-          <Link to="/checkout">Checkout</Link>
-          <Link to="/cart">Cart</Link>
+          <div>
+            <Link to="/login">Login</Link>
+          </div>
+          <div>
+            <Link to="/signup">Sign Up</Link>
+          </div>
+          <div>
+            <Link to="/products">Products</Link>
+          </div>
+          <div>
+            <Link to="/checkout">Checkout</Link>
+          </div>
+          <div>
+            <Link to="/cart">Cart</Link>
+          </div>
         </div>
       )}
     </nav>
-    <hr />
+    {/* <hr /> */}
   </div>
 );
 
