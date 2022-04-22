@@ -2,12 +2,8 @@ const Sequelize = require("sequelize");
 const db = require("../db");
 
 const Order = db.define("order", {
-  userId: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
   status: {
-    type: Sequelize.ENUM("CART", "ORDER"),
+    type: Sequelize.ENUM("CART", "ORDER", "SHIPPED"),
     defaultValue: "CART",
     allowNull: false,
   },

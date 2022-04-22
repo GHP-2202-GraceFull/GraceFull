@@ -37,6 +37,8 @@ const User = db.define("user", {
   },
 });
 
+require("./UserCartMethods")(User, db);
+
 module.exports = User;
 
 /**

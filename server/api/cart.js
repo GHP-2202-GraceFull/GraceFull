@@ -1,4 +1,4 @@
-const router = require('express').Router();
+const router = require("express").Router();
 const User = require("../db/models/User");
 const Order = require("../db/models/Order");
 // const Category = require("../db/models/Category");
