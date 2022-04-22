@@ -58,33 +58,33 @@ async function seed() {
   ]);
 
   //dummy user cart for TESTING
-  const [testUser1, testUser2, smoothie1, smoothie2, smoothie3] =
-    await Promise.all([
-      User.create({ username: "testUser1", password: "123" }),
-      User.create({ username: "testUser2", password: "123" }),
-      Product.create({
-        title: "smoothie1",
-        price: "1",
-        description: "hello1",
-        quantity: "10",
-      }),
-      Product.create({
-        title: "smoothie2",
-        price: "2",
-        description: "hello2",
-        quantity: "11",
-      }),
-      Product.create({
-        title: "smoothie3",
-        price: "3",
-        description: "hello3",
-        quantity: "12",
-      }),
-    ]);
+  // const [testUser1, testUser2, smoothie1, smoothie2, smoothie3] =
+  //   await Promise.all([
+  //     User.create({ username: "testUser1", password: "123" }),
+  //     User.create({ username: "testUser2", password: "123" }),
+  //     Product.create({
+  //       title: "smoothie1",
+  //       price: "1",
+  //       description: "hello1",
+  //       quantity: "10",
+  //     }),
+  //     Product.create({
+  //       title: "smoothie2",
+  //       price: "2",
+  //       description: "hello2",
+  //       quantity: "11",
+  //     }),
+  //     Product.create({
+  //       title: "smoothie3",
+  //       price: "3",
+  //       description: "hello3",
+  //       quantity: "12",
+  //     }),
+  //   ]);
 
-  await testUser1.addToCart(smoothie1);
-  await testUser1.addToCart(smoothie2);
-  await testUser1.addToCart(smoothie3);
+  // await testUser1.addToCart(smoothie1);
+  // await testUser1.addToCart(smoothie2);
+  // await testUser1.addToCart(smoothie3);
 
   //Seeding Dummy Products
   const [bananaBlast, berrylicious, blueberry] = await Promise.all(
