@@ -6,19 +6,29 @@ import { addToCart } from "../store/addToCart";
 
 const Cart = () => {
   const dispatch = useDispatch();
+  //use a react reducer not redux
   const state = useSelector((state) => state);
+  const [itemCount, setItemCount] = useState(1)
   console.log("STATE", state);
   const itemsInCart = useSelector((state) => state.addToCartReducer);
+  const allItemsInStock = useSelector((state) => state.allProducts);
 
   console.log("itemsInCart", itemsInCart);
 
-  //   useEffect(() => {
-  //     dispatch(fetchSingleProduct(productId));
-  //   }, []);
   const total = itemsInCart.reduce(
     (accum, item) => accum + (item.price || 0),
     0
   );
+
+  function decrementItemCount(){
+    setItemCount(prevCount => prevCount - 1)
+    //add use dispatch action
+  }
+
+  function incrementItemCount(){
+    setItemCount(prevCount => prevCount + 1)
+       //add use dispatch action
+  }
 
   return (
     <div className="cart">
@@ -35,7 +45,11 @@ const Cart = () => {
               <img className="item-image" src={item.imageUrl} />
               <li>{item.title}</li>
               <li>Price: ${item.price}</li>
-              <li>Quantity: {item.quantity}</li>
+              <li>Quantity
+              <button onClick={decrementItemCount}> - </button>
+              <span> {itemCount} </span>
+              <button onClick={incrementItemCount}> + </button>
+              <button>Remove item from cart</button></li>
             </div>
           );
         })}
@@ -45,6 +59,7 @@ const Cart = () => {
           <li>
             Total <span> ${total}</span>
           </li>
+          <button>Checkout</button>
         </ul>
       </div>
     </div>
@@ -52,3 +67,10 @@ const Cart = () => {
 };
 
 export default Cart;
+
+//add +/- button to each item added to the cart
+// add remove from cart button
+
+  //   useEffect(() => {
+  //     dispatch(fetchSingleProduct(productId));
+  //   }, []);
