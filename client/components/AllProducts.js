@@ -10,14 +10,14 @@ const AllProducts = () => {
     const dispatch = useDispatch();
     const products = useSelector((state) => {
         return state.allProducts
-    })
+    }) 
 
     useEffect(()=> {
         dispatch(fetchAllProducts())
     }, [])
 
-    sort==='lowHigh'  ? products.sort((a,b)=> a.price-b.price) 
-        : sort==='highLow' ? products.sort((a,b)=> b.price-a.price) 
+    sort==='lowHigh'  ? products.sort((a,b)=> a.price-b.price)
+        : sort==='highLow' ? products.sort((a,b)=> b.price-a.price)
         : null;
 
     return (
