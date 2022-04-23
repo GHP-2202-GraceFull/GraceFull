@@ -11,6 +11,8 @@ import cartReducer from "./cart";
 //App Reducer
 const reducer = combineReducers({
   auth,
+  allProducts,
+  addToCartReducer,
   singleProduct: singleProductReducer,
   cart: cartReducer,
 });

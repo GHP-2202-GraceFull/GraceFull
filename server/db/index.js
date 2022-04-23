@@ -15,8 +15,8 @@ Product.belongsToMany(Category, { through: "product_categories" });
 Category.belongsToMany(Product, { through: "product_categories" });
 
 //Product - Order
-Product.belongsTo(Order);
-Order.hasMany(Product);
+// Product.belongsTo(Order);
+// Order.hasMany(Product);
 
 //Lineitem  - Order
 LineItem.belongsTo(Order);
@@ -24,11 +24,11 @@ Order.hasMany(LineItem);
 
 //Lineitem - Product
 LineItem.belongsTo(Product);
-Product.hasMany(LineItem);
+// Product.hasMany(LineItem);
 
 //User - Order
 Order.belongsTo(User);
-User.hasMany(Order);
+// User.hasMany(Order);
 
 module.exports = {
   db,
