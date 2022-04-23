@@ -3,13 +3,17 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSingleProduct } from "../store/singleProduct";
 import { addToCart } from "../store/addToCart";
+import { removeFromCart } from "../store/cart";
+import AddToCart from "./AddToCart";
+import RemoveFromCart from "./RemoveFromCart";
 
-const Cart = () => {
+const Cart = (props) => {
   const dispatch = useDispatch();
   //use a react reducer not redux
   const state = useSelector((state) => state);
-  const [itemCount, setItemCount] = useState(1)
+  const [itemCount, setItemCount] = useState(1);
   console.log("STATE", state);
+  console.log("PROPS", props);
   const itemsInCart = useSelector((state) => state.addToCartReducer);
   const allItemsInStock = useSelector((state) => state.allProducts);
 
@@ -20,14 +24,14 @@ const Cart = () => {
     0
   );
 
-  function decrementItemCount(){
-    setItemCount(prevCount => prevCount - 1)
+  function decrementItemCount() {
+    setItemCount((prevCount) => prevCount - 1);
     //add use dispatch action
   }
 
-  function incrementItemCount(){
-    setItemCount(prevCount => prevCount + 1)
-       //add use dispatch action
+  function incrementItemCount() {
+    setItemCount((prevCount) => prevCount + 1);
+    //add use dispatch action
   }
 
   return (
@@ -45,11 +49,12 @@ const Cart = () => {
               <img className="item-image" src={item.imageUrl} />
               <li>{item.title}</li>
               <li>Price: ${item.price}</li>
-              <li>Quantity
+              <li>Quantity</li>
               <button onClick={decrementItemCount}> - </button>
               <span> {itemCount} </span>
               <button onClick={incrementItemCount}> + </button>
-              <button>Remove item from cart</button></li>
+              <AddToCart productId={item.id} />
+              <RemoveFromCart productId={item.id} />
             </div>
           );
         })}
@@ -71,6 +76,6 @@ export default Cart;
 //add +/- button to each item added to the cart
 // add remove from cart button
 
-  //   useEffect(() => {
-  //     dispatch(fetchSingleProduct(productId));
-  //   }, []);
+//   useEffect(() => {
+//     dispatch(fetchSingleProduct(productId));
+//   }, []);
