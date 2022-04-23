@@ -66,6 +66,10 @@ nav a {
   color: white;
 }
 
+#expand-account {
+  cursor: pointer;
+}
+
 /* LANDING PAGE */
 #home button {
   font-size: 15px;

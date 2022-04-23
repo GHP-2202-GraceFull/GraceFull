@@ -9,7 +9,6 @@ import { MdOutlineExpandMore } from "react-icons/md";
 //TODO: connect
 const Navbar = ({ handleClick, isLoggedIn }) => (
   <div>
-    {/* <h1>GraceFull</h1> */}
     <nav>
       <div id="nav-logo">
         <Link to="/">
@@ -17,23 +16,24 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
         </Link>
       </div>
       <div className="nav-links">
-        {/* The navbar will show these links before you log in */}
-        {/* <div>
-          <Link to="/signup">Sign Up</Link>
-        </div>
+        {/* Checkout link for testing. TODO: Remove once cart is fully functioning */}
         <div>
-          <Link to="/login">Sign In</Link>
-        </div> */}
+          <Link to="/checkout">Checkout</Link>
+        </div>
         <div>
           <Link to="/products">Products</Link>
         </div>
-        {/* <div>
-          <Link to="/checkout">Checkout</Link>
-        </div> */}
+
         {isLoggedIn ? (
           <>
             <div>
-              Welcome, <strong>User!</strong> <MdOutlineExpandMore />
+              Welcome, <strong> User!</strong>
+              <div
+                id="expand-account"
+                onClick={() => console.log("clicked expand")}
+              >
+                <MdOutlineExpandMore size={24} />
+              </div>
             </div>
             <div>
               <a href="#" onClick={handleClick}>
