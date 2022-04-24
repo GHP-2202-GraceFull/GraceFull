@@ -1,7 +1,8 @@
 /* GENERAL COMPONENTS */
 
 body {
-  font-family: sans-serif;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   margin: 0;
 }
 
@@ -17,8 +18,10 @@ label {
   min-height: 50px;
   border: none;
   border-radius: 10px;
-  padding: 0px 30px;
+  padding: 0px 20px;
   cursor: pointer;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
 form div {
@@ -119,24 +122,79 @@ nav a {
 
 /* SIGN-IN / SIGN-UP */
 
-.auth-wrapper {
+#auth-wrapper {
   display: flex;
-  border: 2px solid black;
-  height: 200vh;
+  height: 100vh;
   width: 100vw;
   position: absolute;
+  top: 0;
   z-index: -1;
+}
+
+#auth-wrapper input {
+  width: 100%;
+  background-color: #e6e6e6;
+  border: 1px solid #9a9ca7;
+  font-size: 20px;
+  height: 40px;
+  width: 100%;
+}
+
+#auth-wrapper input:focus {
+  outline: 1px solid #6b976f;
 }
 
 .auth-container {
   display: flex;
   margin: auto;
-  height: 500px;
-  width: 500px;
+  height: 350px;
+  width: 600px;
+  justify-content: space-between;
+}
+
+.auth-container button {
+  width: 150px;
+  height: 20px;
+  border-radius: 5px;
+}
+
+#log-in-button {
+  background-color: #6b976f;
+  color: white;
+  margin-top: 10px;
+}
+
+#sign-up-button {
+  background-color: white;
 }
 
 .auth-container > form {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 280px;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+form div {
+  margin: 10px 0px;
+}
+
+.auth-container small {
+  font-size: 12px;
+}
+
+#sign-up-prompt {
+  background-color: #f4c970;
+  width: 220px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#sign-up-prompt h3 {
+  margin-top: 0px;
 }
