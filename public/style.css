@@ -38,7 +38,7 @@ nav {
   justify-content: space-between;
   align-content: center;
   background-color: #6b976f;
-  padding: 1rem;
+  padding: 16px;
   align-content: center;
   color: white;
 }
@@ -115,4 +115,28 @@ nav a {
 #home-section2 {
   height: 500px;
   background-color: #f4c970;
+}
+
+/* SIGN-IN / SIGN-UP */
+
+.auth-wrapper {
+  display: flex;
+  border: 2px solid black;
+  height: 200vh;
+  width: 100vw;
+  position: absolute;
+  z-index: -1;
+}
+
+.auth-container {
+  display: flex;
+  margin: auto;
+  height: 500px;
+  width: 500px;
+}
+
+.auth-container > form {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
 }
