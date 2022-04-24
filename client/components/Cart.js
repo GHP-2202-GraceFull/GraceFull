@@ -12,9 +12,6 @@ const Cart = () => {
 
   console.log("itemsInCart", itemsInCart);
 
-  //   useEffect(() => {
-  //     dispatch(fetchSingleProduct(productId));
-  //   }, []);
   const total = itemsInCart.reduce(
     (accum, item) => accum + (item.price || 0),
     0

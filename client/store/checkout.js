@@ -2,13 +2,22 @@ import axios from "axios";
 
 const initialState = {};
 
-const ADD_TO_CART = "ADD_TO_CART";
+
+//what needs to happen at checkout?
+//order status changed from "CART" to "PURCHASED"
+//email to user initiated on order status change
+//shipping address added to order
+//if user not logged in, user email updated from temp email to actual email
+
+
+
+const CHECKOUT = "CHECKOUT";
 
 //action creator
-export const _addToCart = (product) => {
+export const _checkout = (cart) => {
   return {
-    type: ADD_TO_CART,
-    product,
+    type: CHECKOUT,
+    cart,
   };
 };
 

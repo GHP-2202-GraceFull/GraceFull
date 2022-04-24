@@ -1,9 +1,13 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useEffect } from "react";
 import { useDispatch } from "react-redux";
+//use multiple reducers:
 // import { checkout } from "../store/checkout" //TODO import checkout thunk from store 
+// import { setCart } from "../store/addToCart"
+// import user from TODO: create action creator/thunk for user info
 
 
 const initialFormState = {
+    //TODO: should pull user info on useEffect
     firstName: '',
     lastName: '',
     email: '',
@@ -25,7 +29,16 @@ const formReducer = (state, action) => {
 
 const Checkout = () => {
 
+    let items = useSelector((state) => {
+        return state.lineItems //TODO: update with correct reducer after Nikki's next changes
+    })
     //TODO: load line items and calculate total 
+
+    const dispatch = useDispatch();
+
+    useEffect(()=>{
+        dispatch(setCart) //TODO update with correct thunk once nikki changes live
+    })
 
     const [formState, localDispatch ] = useReducer(formReducer, initialFormState);
 
@@ -36,8 +49,6 @@ const Checkout = () => {
             payload: e.target.value
         })
     }
-
-    const dispatch = useDispatch(); 
 
     const handleSubmit = event => {
         event.preventDefault;

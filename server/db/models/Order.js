@@ -35,3 +35,10 @@ const Order = db.define("order", {
         allowNull: false,
     }
 })
+
+
+Order.afterUpdate(async (order) =>{
+    if(order.status==='purchased'){
+        
+    }
+})
