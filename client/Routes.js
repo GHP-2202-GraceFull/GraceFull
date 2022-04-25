@@ -10,7 +10,7 @@ import Checkout from "./components/Checkout";
 import Cart from "./components/Cart";
 import LandingPage from "./components/LandingPage";
 import { me } from "./store";
-import AdminDash from "./components/AdminDash";
+import AdminDash from "./components/Admin/AdminDash";
 /**
  * COMPONENT
  */

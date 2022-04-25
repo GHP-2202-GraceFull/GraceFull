@@ -278,3 +278,18 @@ nav hr {
 #auth-infobox h3 {
   margin-top: 0px;
 }
+
+#admin-products {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+}
+#all-products-admin {
+  width: 50%;
+  overflow: hidden;
+}
+
+#admin-products-options {
+  width: 50%;
+  border: 2px solid black;
+}
