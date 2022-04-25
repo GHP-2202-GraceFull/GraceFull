@@ -71,6 +71,9 @@ async function seed() {
   await berrylicious.addCategory(bowl);
   await blueberry.addCategory(smoothie);
 
+  //seeding carts
+  
+
   //Setting Product/Category Relationships
 
   console.log(`seeded successfully`);

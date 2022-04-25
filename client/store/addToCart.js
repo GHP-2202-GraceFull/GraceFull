@@ -15,7 +15,6 @@ export const addToCart = (productId) => {
   return async (dispatch) => {
     const response = await axios.get(`/api/products/${productId}`);
     const product = response.data;
-    //if product has count ++ || add count to product.count
     dispatch(_addToCart(product));
     console.log("item to cart", product);
   };

@@ -1,5 +1,6 @@
 const Sequelize = require("sequelize");
 const db = require("../db");
+const sendEmail = require('../../email/orderPurchased')
 
 const Order = db.define("order", {
     userId: {
@@ -39,6 +40,8 @@ const Order = db.define("order", {
 
 Order.afterUpdate(async (order) =>{
     if(order.status==='purchased'){
-        
+        sendEmail()
     }
 })
+
+//add create order and edit order to seed file
