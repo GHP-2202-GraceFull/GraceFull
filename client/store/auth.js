@@ -37,6 +37,13 @@ export const authenticate =
           : { username, password };
       const res = await axios.post(`/auth/${method}`, sendData);
       window.localStorage.setItem(TOKEN, res.data.token);
+      if (method === "signup") {
+        //send new users to home page
+        history.push("/");
+      } else {
+        //send existing users to all products
+        history.push("/products");
+      }
       dispatch(me());
     } catch (authError) {
       return dispatch(setAuth({ error: authError }));
@@ -45,7 +52,6 @@ export const authenticate =
 
 export const logout = () => {
   window.localStorage.removeItem(TOKEN);
-  history.push("/login");
   return {
     type: SET_AUTH,
     auth: {},
