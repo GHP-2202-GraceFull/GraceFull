@@ -9,9 +9,10 @@ import AccountDropdown from "./AccountDropdown";
 
 const Navbar = () => {
   const [dropdown, setDropdown] = useState(false);
+  const user = useSelector((state) => state.auth.username);
+  //TODO: BUG -> when a user signs up and logs back in, dropdown remembers state of 'true'
   const isLoggedIn = useSelector((state) => !!state.auth.id);
   console.log(isLoggedIn, "is logged in");
-
   return (
     <div>
       <nav>
@@ -32,15 +33,13 @@ const Navbar = () => {
           {isLoggedIn ? (
             <>
               <div>
-                Welcome, <strong> User!</strong>
-                <div
-                  id="expand-account"
-                  onClick={() => {
-                    setDropdown(!dropdown);
-                    console.log(dropdown, "clicked, dropdown");
-                  }}
-                >
-                  <MdOutlineExpandMore size={24} />
+                Welcome, {user}
+                <div id="expand-account" onClick={() => setDropdown(!dropdown)}>
+                  {/*TODO: Clean up ternerary for classname - can't figure out how to make a simple conditional within the component props*/}
+                  <MdOutlineExpandMore
+                    size={24}
+                    className={dropdown ? "flip-vertical" : ""}
+                  />
                 </div>
               </div>
               <AccountDropdown visible={dropdown} />

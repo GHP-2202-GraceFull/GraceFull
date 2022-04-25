@@ -24,6 +24,10 @@ label {
   align-items: center;
 }
 
+.flip-vertical {
+  transform: scaleY(-1);
+}
+
 .button {
   min-height: 50px;
   border: none;
@@ -72,6 +76,7 @@ nav {
 .nav-links > div {
   display: flex;
   align-items: center;
+  max-width: 250px;
 }
 
 nav a {
