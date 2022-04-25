@@ -25,15 +25,13 @@ const AuthForm = (props) => {
             </label>
             <input name="password" type="password" />
           </div>
-          {location.pathname === "/signup" ? (
+          {location.pathname === "/signup" && (
             <div>
               <label htmlFor="email">
                 <small>Email:</small>
               </label>
               <input name="email" type="text" />
             </div>
-          ) : (
-            <></>
           )}
           <div>
             <button className="button" type="submit" id="log-in-button">
