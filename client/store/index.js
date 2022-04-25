@@ -5,14 +5,15 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import auth from "./auth";
 import allProducts from "./allProducts";
 import singleProductReducer from "./singleProduct";
-import addToCartReducer from "./addToCart";
+//import addToCartReducer from "./addToCart";
+import cartReducer from "./cart";
 
 //App Reducer
 const reducer = combineReducers({
   auth,
   allProducts,
   singleProduct: singleProductReducer,
-  addToCartReducer,
+  cartReducer,
 });
 
 //Middleware
