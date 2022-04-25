@@ -4,10 +4,10 @@ import { removeFromCart } from "../store/cart";
 
 const RemoveFromCart = (props) => {
   const dispatch = useDispatch();
-  const productId = props.productId;
-  console.log("productId for remove", productId);
+  const product = props.product;
+  console.log("productId for remove", product);
   return (
-    <button type="submit" onClick={() => dispatch(removeFromCart(productId))}>
+    <button type="submit" onClick={() => dispatch(removeFromCart(product))}>
       Remove from Cart
     </button>
   );

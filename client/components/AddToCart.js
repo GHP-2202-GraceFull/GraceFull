@@ -1,14 +1,14 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../store/addToCart";
-// import { addToCart } from "../store/cart";
+//import { addToCart } from "../store/addToCart";
+import { addToCart } from "../store/cart";
 
 const AddToCart = (props) => {
   const dispatch = useDispatch();
-  const productId = props.productId;
-  console.log("productId for addToCart", productId);
+  const product = props.product;
+  console.log("productId for addToCart", product);
   return (
-    <button type="submit" onClick={() => dispatch(addToCart(productId))}>
+    <button type="submit" onClick={() => dispatch(addToCart(product))}>
       Add to Cart
     </button>
   );
