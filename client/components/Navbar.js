@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { connect, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
+import { useEffect } from "react";
+import { setCart } from "../store/cart";
 import { FiShoppingCart } from "react-icons/fi";
 import { MdOutlineExpandMore } from "react-icons/md";
 
@@ -10,6 +11,11 @@ import AccountDropdown from "./AccountDropdown";
 const Navbar = () => {
   const [dropdown, setDropdown] = useState(false);
   const user = useSelector((state) => state.auth.username);
+  const cart = useSelector((state) => state.cartReducer);
+  const totalCartCount = cart.reduce(
+    (accum, item) => accum + (item.quantity || 0),
+    0
+  );
   //TODO: BUG -> when a user signs up and logs back in, dropdown remembers state of 'true'
   const isLoggedIn = useSelector((state) => !!state.auth.id);
   console.log(isLoggedIn, "is logged in");
@@ -50,7 +56,7 @@ const Navbar = () => {
             </div>
           )}
           <div>
-            <span>0</span>
+            <span>{totalCartCount}</span>
             <Link to="/cart">
               <FiShoppingCart size={24} />
             </Link>

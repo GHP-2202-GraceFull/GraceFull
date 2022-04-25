@@ -6,7 +6,6 @@ const SET_CART = "SET_CART";
 const ADD_TO_CART = "ADD_TO_CART";
 const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 const REMOVE_ALL_FROM_CART = "REMOVE_FROM_CART";
-const EMPTY_CART = "EMPTY_CART";
 
 //ACTION CREATORS
 export const _setCart = (cart) => {
@@ -33,13 +32,6 @@ export const _removeFromCart = (product) => {
 export const _removeAllFromCart = (product) => {
   return {
     type: REMOVE_ALL_FROM_CART,
-    product,
-  };
-};
-
-export const _emptyCart = (product) => {
-  return {
-    type: EMPTY_CART,
     product,
   };
 };
@@ -81,9 +73,10 @@ export const removeFromCart = (product) => {
         authorization: token,
       },
     });
+    console.log("PRODUCT SENT IN REMOVE FROM CART", product);
     const cart = response.data;
     dispatch(_removeFromCart(cart.lineitems));
-    console.log("THUNK remove from cart", cart.lineitems);
+    console.log("THUNK car.lineitems remove from cart", cart.lineitems);
   };
 };
 
@@ -91,28 +84,14 @@ export const removeAllFromCart = (product) => {
   return async (dispatch) => {
     const token = window.localStorage.getItem(TOKEN);
     //quantity = 0
-    const response = await axios.post(`/api/cart/remove`, product, {
+    const response = await axios.post(`/api/cart/removeAll`, product, {
       headers: {
         authorization: token,
       },
     });
     const cart = response.data;
-        dispatch(_removeAllFromCart(cart));
-    console.log("THUNK ALL remove from cart", cart);
-  };
-};
-
-export const emptyCart = () => {
-  return async (dispatch) => {
-    const token = window.localStorage.getItem(TOKEN);
-    const response = await axios.get(`/api/cart`, {
-      headers: {
-        authorization: token,
-      },
-    });
-    const product = response.data;
-    dispatch(_emptyCart(product));
-    console.log("empty cart", product);
+    dispatch(_removeAllFromCart(cart.lineitems));
+    console.log("THUNK ALL remove from cart", cart.lineitems);
   };
 };
 
@@ -128,11 +107,9 @@ export default function cartReducer(state = [], action) {
     case REMOVE_FROM_CART:
       console.log(`remove action.product from cartReducer`, action.product);
       return action.product;
-   case REMOVE_ALL_FROM_CART:
+    case REMOVE_ALL_FROM_CART:
       console.log(`remove ALL action.product from cartReducer`, action.cart);
-      return action.cart;
-    case EMPTY_CART:
-      return [];
+      return action.product;
     default:
       return state;
   }
