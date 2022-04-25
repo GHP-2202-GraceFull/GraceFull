@@ -192,10 +192,8 @@ nav hr {
 
 #auth-wrapper {
   display: flex;
-  height: 100vh;
+  height: 88vh;
   width: 100vw;
-  position: absolute;
-  top: 0;
   z-index: -1;
 }
 

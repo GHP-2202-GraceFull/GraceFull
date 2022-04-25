@@ -1,8 +1,10 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { logout } from "../store";
 
 const AccountDropdown = ({ visible }) => {
-  console.log("visible inside dropdown component: ", visible);
+  const dispatch = useDispatch();
   return (
     <div id={visible ? "visible-dropdown" : "hidden-dropdown"}>
       <div id="dropdown-container">
@@ -11,7 +13,7 @@ const AccountDropdown = ({ visible }) => {
         </div>
         <hr />
         <div>
-          <a href="#" onClick={() => console.log("sign out clicked")}>
+          <a href="#" onClick={() => dispatch(logout())}>
             Sign Out
           </a>
         </div>

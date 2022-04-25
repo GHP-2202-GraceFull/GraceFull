@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { connect, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { logout } from "../store";
 
 import { FiShoppingCart } from "react-icons/fi";
 import { MdOutlineExpandMore } from "react-icons/md";
