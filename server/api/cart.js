@@ -19,6 +19,7 @@ router.post("/", async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
     res.send(await user.addToCart(req.body)); //req.body = product
+    console.log(`req.body`, req.body)
   } catch (error) {
     next(error);
   }
@@ -29,11 +30,24 @@ router.delete("/", async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
     console.log("DELETE req.body?", req.body);
+    console.log(`delete req.body`, req.body)
     res.send(await user.removeFromCart(req.body)); //req.body = product
   } catch (error) {
     next(error);
   }
 });
+
+// PUT (Update Cart) /api/cart
+router.put("/", async (req, res, next) => {
+  try {
+    const user = await User.findByToken(req.headers.authorization);
+    res.send(await user.updateCart(req.body)); //req.body = product
+  } catch (error) {
+    next(error);
+  }
+});
+
+module.exports = router;
 
 //Team Note: We may want to consider middleware to replace const user = await....
 
@@ -63,4 +77,4 @@ router.delete("/", async (req, res, next) => {
 //   }
 // });
 
-module.exports = router;
+
