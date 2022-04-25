@@ -19,15 +19,21 @@ const AdminProducts = () => {
             onSubmit={() => console.log("submit new product clicked")}
           >
             <label htmlFor="name">Product Name:</label>
-            <input name="name" type="text"></input>
+            <input name="name" type="text" className="text-input" />
             <label htmlFor="description">Description:</label>
-            <input name="description" type="text"></input>
-            <label htmlFor="price">Price:</label>
-            <input name="price" type="number"></input>
-            <label htmlFor="stock">Stock:</label>
-            <input name="stock" type="number"></input>
+            <textarea name="description" />
             <label htmlFor="imageUrl">Image URL:</label>
-            <input name="imageUrl" type="url"></input>
+            <input name="imageUrl" type="url" className="text-input" />
+            <label htmlFor="price">Price:</label>
+            <input
+              name="price"
+              type="number"
+              min={0}
+              className="number-input"
+            />
+
+            <label htmlFor="stock">Stock:</label>
+            <input name="stock" type="number" min={0}></input>
             <fieldset onChange={(event, value) => console.log(value)}>
               <legend>Categories:</legend>
               <div className="fieldset">
