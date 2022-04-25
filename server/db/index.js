@@ -24,11 +24,11 @@ Order.hasMany(LineItem);
 
 //Lineitem - Product
 LineItem.belongsTo(Product);
-// Product.hasMany(LineItem);
+//Product.hasMany(LineItem);
 
 //User - Order
 Order.belongsTo(User);
-// User.hasMany(Order);
+User.hasMany(Order);
 
 module.exports = {
   db,

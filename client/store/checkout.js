@@ -2,8 +2,6 @@ import axios from "axios";
 
 
 const initialState = {
-  cart: [],
-  orderData: {}
 };
 
 
@@ -18,14 +16,7 @@ const initialState = {
 const CHECKOUT = "CHECKOUT";
 
 //action creator
-export const _setCart = (cart) => {
-  return {
-    type: SET_CART,
-    cart,
-  };
-};
-
-export const _checkout = (data, cartId) => {
+export const _checkout = (data) => {
   return {
     type: CHECKOUT,
     data,
@@ -33,22 +24,10 @@ export const _checkout = (data, cartId) => {
 };
 
 //thunks
-export const setCart = () => {
+export const checkoutCart = (data) =>{
   return async (dispatch) => {
-    const token = window.localStorage.getItem(TOKEN);
-    const response = await axios.get(`/api/cart`, {
-      headers: {
-        authorization: token,
-      },
-    });
-    const cart = response.data;
-    dispatch(_setCart(cart.lineitems));
-  };
-};
-
-export const checkoutCart = (data, cartId) =>{
-  return async (dispatch) => {
-    const cart = await find
+    //laurynn TODO create backend method/route
+    
   }
 }
 
