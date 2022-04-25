@@ -9,7 +9,6 @@ import { authenticate } from "../store";
 const AuthForm = (props) => {
   const { name, displayName, handleSubmit, error } = props;
   const location = useLocation();
-  console.log(location);
   return (
     <div id="auth-wrapper">
       <div className="auth-container">
