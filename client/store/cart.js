@@ -5,10 +5,8 @@ const TOKEN = "token";
 const SET_CART = "SET_CART";
 const ADD_TO_CART = "ADD_TO_CART";
 const REMOVE_FROM_CART = "REMOVE_FROM_CART";
+const REMOVE_ALL_FROM_CART = "REMOVE_FROM_CART";
 const EMPTY_CART = "EMPTY_CART";
-const UPDATE_CART = "UPDATE_CART";
-const INCREASE_QUANTITY = "INCREASE_QUANTITY";
-const DECREASE_QUANTITY = "DECREASE_QUANTITY";
 
 //ACTION CREATORS
 export const _setCart = (cart) => {
@@ -25,10 +23,17 @@ export const _addToCart = (product) => {
   };
 };
 
-export const _removeFromCart = (lineitem) => {
+export const _removeFromCart = (product) => {
   return {
     type: REMOVE_FROM_CART,
-    lineitem,
+    product,
+  };
+};
+
+export const _removeAllFromCart = (product) => {
+  return {
+    type: REMOVE_ALL_FROM_CART,
+    product,
   };
 };
 
@@ -36,27 +41,6 @@ export const _emptyCart = (product) => {
   return {
     type: EMPTY_CART,
     product,
-  };
-};
-
-export const _updateCart = (cart) => {
-  return {
-    type: UPDATE_CART,
-    cart,
-  };
-};
-
-export const increaseQuantity = (productId) => {
-  return {
-    type: INCREASE_QUANTITY,
-    payload: productId,
-  };
-};
-
-export const decreaseQuantity = (productId) => {
-  return {
-    type: DECREASE_QUANTITY,
-    payload: productId,
   };
 };
 
@@ -75,22 +59,6 @@ export const setCart = () => {
   };
 };
 
-// //Laurynn
-// export const addToCart = (productId) => {
-//   return async (dispatch) => {
-//     // getting information on the product
-//     const response = await axios.post(`/api/cart/`, productId);
-//     const product = response.data;
-//     // sending the information to the backend route to be updated
-
-//     //if product has count ++ || add count to product.count
-//     dispatch(_addToCart(cart.lineitems));
-
-//     console.log("item to cart", cart.lineitems);
-//   };
-// };
-
-//NIKKI
 export const addToCart = (product) => {
   return async (dispatch) => {
     const token = window.localStorage.getItem(TOKEN);
@@ -100,19 +68,18 @@ export const addToCart = (product) => {
       },
     });
     const cart = response.data;
-//    dispatch(_addToCart(cart.lineitems));
+    dispatch(_addToCart(cart.lineitems));
     console.log("THUNK add to cart", cart.lineitems);
   };
 };
 
-export const removeFromCart = (lineitem) => {
+export const removeFromCart = (product) => {
   return async (dispatch) => {
     const token = window.localStorage.getItem(TOKEN);
-    const response = await axios.delete(`/api/cart`, {
+    const response = await axios.post(`/api/cart/remove`, product, {
       headers: {
         authorization: token,
       },
-      data: { lineitem: lineitem },
     });
     const cart = response.data;
     dispatch(_removeFromCart(cart.lineitems));
@@ -120,17 +87,18 @@ export const removeFromCart = (lineitem) => {
   };
 };
 
-export const updateCart = (updatedProduct) => {
+export const removeAllFromCart = (product) => {
   return async (dispatch) => {
     const token = window.localStorage.getItem(TOKEN);
-    const response = await axios.put(`/api/cart`, updatedProduct, {
+    //quantity = 0
+    const response = await axios.post(`/api/cart/remove`, product, {
       headers: {
         authorization: token,
       },
     });
-    const product = response.data;
-    dispatch(_updateCart(product));
-    console.log("THUNK update cart", product);
+    const cart = response.data;
+        dispatch(_removeAllFromCart(cart));
+    console.log("THUNK ALL remove from cart", cart);
   };
 };
 
@@ -155,30 +123,16 @@ export default function cartReducer(state = [], action) {
       console.log(`This is the SET_CART case:`, action.cart);
       return action.cart;
     case ADD_TO_CART:
-      return [...state, action.product];
+      console.log(`add action.product from cartReducer`, action.product);
+      return action.product;
     case REMOVE_FROM_CART:
-      return state.filter((product) => product.id !== action.lineitem.id);
-    case INCREASE_QUANTITY:
-      let tempIncrease = state.cart.map((product) => {
-        if (product.id == action.payload) {
-          return { ...product, quantity: product.quantity + 1 };
-        }
-        return product;
-      });
-      return { ...state, cart: tempIncrease };
-     case DECREASE_QUANTITY:
-       console.log(`this is state.log`, state.cart)
-        let tempDecrease = state.cart.map((product) => {
-          if (product.id == action.payload) {
-            return { ...product, quantity: product.quantity - 1 };
-          }
-          return product;
-        }).filter((product) => product.quantity !== 0);
-        return { ...state, cart: tempDecrease };
-     case EMPTY_CART:
-      return [];
-     case UPDATE_CART:
+      console.log(`remove action.product from cartReducer`, action.product);
+      return action.product;
+   case REMOVE_ALL_FROM_CART:
+      console.log(`remove ALL action.product from cartReducer`, action.cart);
       return action.cart;
+    case EMPTY_CART:
+      return [];
     default:
       return state;
   }
