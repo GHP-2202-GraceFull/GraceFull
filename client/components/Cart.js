@@ -14,11 +14,6 @@ const Cart = () => {
     dispatch(setCart());
   }, []); //componendDidMount bring items into state ???? DB to global store
 
-<<<<<<< HEAD
-  const total = itemsInCart.reduce(
-    (accum, item) => accum + (item.price || 0),
-    0
-=======
   console.log("itemsInCart", cart);
   // const lineItems = itemsInCart[0];
   //const itemCount = itemsInCart[0].length;
@@ -32,7 +27,6 @@ const Cart = () => {
   console.log(
     `itemsInCart.map`,
     cart.map((item) => item.product)
->>>>>>> main
   );
 
   return (

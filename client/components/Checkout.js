@@ -1,8 +1,8 @@
 import React, { useReducer, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 //use multiple reducers:
 // import { checkout } from "../store/checkout" //TODO import checkout thunk from store 
-// import { setCart } from "../store/addToCart"
+import { setCart } from "../store/cart"
 // import user from TODO: create action creator/thunk for user info
 
 
@@ -30,15 +30,17 @@ const formReducer = (state, action) => {
 const Checkout = () => {
 
     let items = useSelector((state) => {
-        return state.lineItems //TODO: update with correct reducer after Nikki's next changes
+        return state.lineItems 
     })
     //TODO: load line items and calculate total 
 
     const dispatch = useDispatch();
 
     useEffect(()=>{
-        dispatch(setCart) //TODO update with correct thunk once nikki changes live
-    })
+        dispatch(setCart)
+    }, [])
+
+    console.log(items)
 
     const [formState, localDispatch ] = useReducer(formReducer, initialFormState);
 
@@ -59,6 +61,8 @@ const Checkout = () => {
     return (
         <div>
             <h3>Checkout</h3>
+            <h4>{itemCount} items in cart</h4>
+            <a href='/cart'>Return to cart</a>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="firstName">First Name</label>
                 <input name="firstName" onChange={handleChange} value={formState.firstName} />

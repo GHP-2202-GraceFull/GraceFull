@@ -14,7 +14,7 @@ const AllProducts = () => {
 
   useEffect(() => {
     dispatch(fetchAllProducts());
-  });
+  }, []);
 
   sort === "lowHigh"
     ? products.sort((a, b) => a.price - b.price)
