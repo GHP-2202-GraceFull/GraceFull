@@ -14,6 +14,16 @@ label {
   display: block;
 }
 
+#footer {
+  height: 64px;
+  color: white;
+  background-color: #6b976f;
+  display: flex;
+  font-family: "Courier New", Courier, monospace;
+  justify-content: center;
+  align-items: center;
+}
+
 .button {
   min-height: 50px;
   border: none;
