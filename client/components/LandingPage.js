@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const LandingPage = () => {
   return (
@@ -14,13 +15,11 @@ const LandingPage = () => {
             </p>
           </div>
           <div>
-            <button
-              type="button"
-              onClick={() => console.log("clicked!")}
-              className="button"
-            >
-              Shop All Products
-            </button>
+            <Link to="/products">
+              <button type="button" className="button">
+                Shop All Products
+              </button>
+            </Link>
           </div>
         </div>
         <div id="home-imageContainer" />
