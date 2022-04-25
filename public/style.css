@@ -279,17 +279,46 @@ nav hr {
   margin-top: 0px;
 }
 
-#admin-products {
-  display: flex;
-  flex-direction: row;
+/* ----ADMIN DASHBOARD----- */
+
+/* Products */
+
+#dashboard {
+  height: calc(100vh - 126px);
   width: 100vw;
-}
-#all-products-admin {
-  width: 50%;
   overflow: hidden;
 }
 
+#admin-products {
+  display: flex;
+  flex-direction: row;
+  height: calc(100% - 48px);
+  width: 100vw;
+}
+
+#all-products-admin {
+  width: 70%;
+  height: 100%;
+  border: 2px solid green;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
 #admin-products-options {
-  width: 50%;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
   border: 2px solid black;
+}
+
+.fieldset {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0;
+}
+
+.fieldset > div {
+  display: flex;
 }
