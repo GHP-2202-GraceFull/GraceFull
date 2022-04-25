@@ -55,7 +55,7 @@ const AllProducts = () => {
         <div key={product.id}>
           <h3>{product.title}</h3>
           <h3>${product.price}</h3>
-          <AddToCart productId={product.id} />
+          <AddToCart product={product} />
           <img src={product.imageUrl} />
           <Link to={`/products/${product.id}`}>More Info</Link>
         </div>
