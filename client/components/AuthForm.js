@@ -1,11 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { authenticate } from "../store";
 
-/**
- * COMPONENT
- */
+//TODO: Possible separate into two components to avoid excessive conditionals? // might updating back-end routes for user authentication
+
 const AuthForm = (props) => {
   const { name, displayName, handleSubmit, error } = props;
   const location = useLocation();
@@ -42,8 +42,8 @@ const AuthForm = (props) => {
           </div>
           {error && error.response && <div> {error.response.data} </div>}
         </form>
-        {location.pathname === "/login" && (
-          <div id="sign-up-prompt">
+        {location.pathname === "/login" ? (
+          <div id="auth-infobox">
             <div>
               <h3>New customer?</h3>
               <p>Create an account with us to:</p>
@@ -53,10 +53,23 @@ const AuthForm = (props) => {
                 <li>Keep track of past orders</li>
               </ul>
             </div>
-
-            <button type="button" id="sign-up-button" className="button">
-              Sign Up
-            </button>
+            <Link to="/signup">
+              <button type="button" id="sign-up-button" className="button">
+                Sign Up
+              </button>
+            </Link>
+          </div>
+        ) : (
+          <div id="auth-infobox">
+            <div>
+              <h3>Already have an account?</h3>
+              <p>Click below to navigate back to the log in page. </p>
+            </div>
+            <Link to="/login">
+              <button type="button" id="sign-up-button" className="button">
+                Log In
+              </button>
+            </Link>
           </div>
         )}
       </div>
