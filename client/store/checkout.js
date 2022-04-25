@@ -1,6 +1,10 @@
 import axios from "axios";
 
-const initialState = {};
+
+const initialState = {
+  cart: [],
+  orderData: {}
+};
 
 
 //what needs to happen at checkout?
@@ -14,31 +18,49 @@ const initialState = {};
 const CHECKOUT = "CHECKOUT";
 
 //action creator
-export const _checkout = (cart) => {
+export const _setCart = (cart) => {
   return {
-    type: CHECKOUT,
+    type: SET_CART,
     cart,
   };
 };
 
-//thunk
-export const addToCart = (productId) => {
-  return async (dispatch) => {
-    const response = await axios.get(`/api/products/${productId}`);
-    const product = response.data;
-    //if product has count ++ || add count to product.count
-    dispatch(_addToCart(product));
-    console.log("item to cart", product);
+export const _checkout = (data, cartId) => {
+  return {
+    type: CHECKOUT,
+    data,
   };
 };
 
-//reducer
-export default function addToCartReducer(state = initialState, action) {
-  switch (action.type) {
-    case ADD_TO_CART:
-      return [...state, action.product];
+//thunks
+export const setCart = () => {
+  return async (dispatch) => {
+    const token = window.localStorage.getItem(TOKEN);
+    const response = await axios.get(`/api/cart`, {
+      headers: {
+        authorization: token,
+      },
+    });
+    const cart = response.data;
+    dispatch(_setCart(cart.lineitems));
+  };
+};
 
-    default:
-      return state;
+export const checkoutCart = (data, cartId) =>{
+  return async (dispatch) => {
+    const cart = await find
   }
 }
+
+//laurynn TODO create method/backend route for updating cart
+//
+
+//reducer
+      export default function checkoutReducer(state = initialState, action) {
+        switch (action.type){
+          case CHECKOUT:
+            return action.data;
+          default:
+            return state;
+        }
+      }
