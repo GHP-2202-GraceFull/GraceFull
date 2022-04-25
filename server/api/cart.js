@@ -26,10 +26,10 @@ router.post("/", async (req, res, next) => {
 });
 
 // DELETE (Remove From Cart) /api/cart
-router.delete("/", async (req, res, next) => {
+router.post("/remove", async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
-    console.log("DELETE req.body?", req.body);
+
     console.log(`delete req.body`, req.body)
     res.send(await user.removeFromCart(req.body)); //req.body = product
   } catch (error) {
@@ -37,15 +37,16 @@ router.delete("/", async (req, res, next) => {
   }
 });
 
-// PUT (Update Cart) /api/cart
-router.put("/", async (req, res, next) => {
-  try {
-    const user = await User.findByToken(req.headers.authorization);
-    res.send(await user.updateCart(req.body)); //req.body = product
-  } catch (error) {
-    next(error);
-  }
-});
+// // PUT (Update Cart) /api/cart
+// router.put("/", async (req, res, next) => {
+//   try {
+//     const user = await User.findByToken(req.headers.authorization);
+//     console.log("??????????req.body", req.body);
+//     res.send(await user.removeFromCart(req.body)); //req.body = product
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 
 module.exports = router;
 
