@@ -58,15 +58,27 @@ module.exports = (User, db) => {
     return this.getCart();
   };
 
-  User.prototype.updateCart = async function (product){
+  User.prototype.updateCart = async function (product) {
     const cart = await this.getCart();
     const lineItem = cart.dataValues.lineitems.find(
       (lineItem) => lineItem.productId === product.id
     );
-    await lineItem.update(
-      { quantity: product.quantity }
-    )
+    await lineItem.update({ quantity: product.quantity });
     return this.getCart();
-  }
+  };
 
+  User.prototype.removeAllFromCart = async function (product) {
+    const cart = await this.getCart();
+    console.log("PRODUCT IN USER METHODS", product);
+    console.log("CART in USER METHODS", cart);
+    const lineItem = cart.dataValues.lineitems.find(
+      (lineItem) => lineItem.productId === product.product.id
+    );
+
+    if (lineItem) {
+      await lineItem.destroy();
+    }
+
+    return this.getCart();
+  };
 };

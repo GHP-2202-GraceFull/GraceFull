@@ -202,7 +202,7 @@ nav hr {
   z-index: -1;
 }
 
-#auth-wrapper input {
+input {
   width: 100%;
   background-color: #e6e6e6;
   border: 2px solid #9a9ca7;
@@ -277,4 +277,53 @@ nav hr {
 
 #auth-infobox h3 {
   margin-top: 0px;
+}
+
+/* ----ADMIN DASHBOARD----- */
+
+/* Products */
+
+#dashboard {
+  height: calc(100vh - 126px);
+  width: 100vw;
+  overflow: hidden;
+}
+
+#admin-products {
+  display: flex;
+  flex-direction: row;
+  height: calc(100% - 48px);
+  width: 100vw;
+}
+
+#all-products-admin {
+  width: 70%;
+  height: 100%;
+  border: 2px solid green;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+#admin-products-options {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid black;
+}
+
+#new-product-container {
+  padding: 0 10px;
+}
+
+.fieldset {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  margin: 0;
+  row-gap: 10px;
+}
+
+.fieldset > div {
+  display: flex;
 }
