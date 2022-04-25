@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const AccountDropdown = () => {
+const AccountDropdown = ({ visible }) => {
   return (
-    <div id="dropdown-container">
+    <div id="dropdown-container" className={visible && "dropdown"}>
       <div>
         <Link>My Orders</Link>
       </div>

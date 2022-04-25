@@ -70,6 +70,10 @@ nav a {
   cursor: pointer;
 }
 
+.dropdown {
+  display: block;
+}
+
 /* LANDING PAGE */
 #home button {
   font-size: 15px;
