@@ -22,7 +22,7 @@ module.exports = (User, db) => {
       cart = await Order.create(where);
     }
 
-    return Order.findByPk(cart.id, {
+    return await Order.findByPk(cart.id, {
       include: [{ model: LineItem, include: [Product] }],
     });
   };
@@ -57,4 +57,16 @@ module.exports = (User, db) => {
     }
     return this.getCart();
   };
+
+  User.prototype.updateCart = async function (product){
+    const cart = await this.getCart();
+    const lineItem = cart.dataValues.lineitems.find(
+      (lineItem) => lineItem.productId === product.id
+    );
+    await lineItem.update(
+      { quantity: product.quantity }
+    )
+    return this.getCart();
+  }
+
 };
