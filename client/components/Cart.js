@@ -2,63 +2,74 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSingleProduct } from "../store/singleProduct";
-import { addToCart } from "../store/addToCart";
+import { setCart, increaseQuantity, decreaseQuantity } from "../store/cart";
+import AddToCart from "./AddToCart";
+import RemoveFromCart from "./RemoveFromCart";
 
 const Cart = () => {
+  const cart = useSelector((state) => state.cartReducer); //Store into component
   const dispatch = useDispatch();
-  //use a react reducer not redux
-  const state = useSelector((state) => state);
-  const [itemCount, setItemCount] = useState(1)
-  console.log("STATE", state);
-  const itemsInCart = useSelector((state) => state.addToCartReducer);
-  const allItemsInStock = useSelector((state) => state.allProducts);
 
-  console.log("itemsInCart", itemsInCart);
+  useEffect(() => {
+    dispatch(setCart());
+  }, []); //componendDidMount bring items into state ???? DB to global store
 
-  const total = itemsInCart.reduce(
-    (accum, item) => accum + (item.price || 0),
-    0
+  console.log("itemsInCart", cart);
+  // const lineItems = itemsInCart[0];
+  //const itemCount = itemsInCart[0].length;
+
+  //Calculate the total
+  // const total = itemsInCart.reduce(
+  //   (accum, item) => accum + (item.price || 0),
+  //   0
+  // );
+
+  console.log(
+    `itemsInCart.map`,
+    cart.map((item) => item.product)
   );
-
-  function decrementItemCount(){
-    setItemCount(prevCount => prevCount - 1)
-    //add use dispatch action
-  }
-
-  function incrementItemCount(){
-    setItemCount(prevCount => prevCount + 1)
-       //add use dispatch action
-  }
 
   return (
     <div className="cart">
       <h3>GraceFull Shopping Cart</h3>
       <h4>
         <span className="itemCount">
-          There are {itemsInCart.length} items in the cart
+          {/* There are {itemCount} items in the cart */}
         </span>
       </h4>
       <ul className="items-in-cart">
-        {itemsInCart.map((item) => {
-          return (
-            <div key={item.id}>
-              <img className="item-image" src={item.imageUrl} />
-              <li>{item.title}</li>
-              <li>Price: ${item.price}</li>
-              <li>Quantity
-              <button onClick={decrementItemCount}> - </button>
-              <span> {itemCount} </span>
-              <button onClick={incrementItemCount}> + </button>
-              <button>Remove item from cart</button></li>
-            </div>
-          );
-        })}
+        {cart.length === 0
+          ? "Loading..."
+          : cart.map((item) => {
+              return (
+                <div key={item.id}>
+                  <img className="item-image" src={item.product.imageUrl} />
+                  <li>{item.product.title}</li>
+                  <li>Price: ${item.product.price}</li>
+                  <li>Quantity</li>
+                  <button
+                    onClick={() => dispatch(decreaseQuantity(item.product.id))}
+                  >
+                    {" "}
+                    -{" "}
+                  </button>
+                  <span> {item.quantity} </span>
+                  <button
+                    onClick={() => dispatch(increaseQuantity(item.product.id))}
+                  >
+                    {" "}
+                    +{" "}
+                  </button>
+                  {/* <RemoveFromCart productId={item.id} /> */}
+                </div>
+              );
+            })}
       </ul>
       <div className="cartSummary">
         <ul>
-          <li>
+          {/* <li>
             Total <span> ${total}</span>
-          </li>
+          </li> */}
           <button>Checkout</button>
         </ul>
       </div>
@@ -67,10 +78,3 @@ const Cart = () => {
 };
 
 export default Cart;
-
-//add +/- button to each item added to the cart
-// add remove from cart button
-
-  //   useEffect(() => {
-  //     dispatch(fetchSingleProduct(productId));
-  //   }, []);

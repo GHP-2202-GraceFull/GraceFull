@@ -22,9 +22,13 @@ const AllProducts = () => {
     ? products.sort((a, b) => b.price - a.price)
     : null;
 
+  console.log(filter, "filter value before if statement"); // TODO: remove console.log
+
   if (filter && filter !== "") {
     products = products.filter((product) => {
+      console.log(product.categories, "product.categories");
       const categoryNames = product.categories.map((category) => category.name);
+      console.log(categoryNames);
       return categoryNames.includes(filter);
     });
   }
@@ -37,6 +41,7 @@ const AllProducts = () => {
         <select
           name="filter"
           onChange={(event) => {
+            console.log(event.target.value);
             setFilter(event.target.value);
           }}
         >
