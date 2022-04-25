@@ -1,14 +1,18 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../store";
 
 import { FiShoppingCart } from "react-icons/fi";
 import { MdOutlineExpandMore } from "react-icons/md";
 
-//TODO: connect
-const Navbar = ({ handleClick, isLoggedIn }) => {
+import AccountDropdown from "./AccountDropdown";
+
+const Navbar = () => {
   const [dropdown, setDropdown] = useState(false);
+  const isLoggedIn = useSelector((state) => !!state.auth.id);
+  console.log(isLoggedIn, "is logged in");
+
   return (
     <div>
       <nav>
@@ -30,11 +34,17 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
             <>
               <div>
                 Welcome, <strong> User!</strong>
-                <div id="expand-account" onClick={() => setDropdown(!dropdown)}>
+                <div
+                  id="expand-account"
+                  onClick={() => {
+                    setDropdown(!dropdown);
+                    console.log(dropdown, "clicked, dropdown");
+                  }}
+                >
                   <MdOutlineExpandMore size={24} />
                 </div>
               </div>
-              <AuthForm visible={dropdown} />
+              <AccountDropdown visible={dropdown} />
             </>
           ) : (
             <div>
@@ -56,18 +66,18 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
 /**
  * CONTAINER
  */
-const mapState = (state) => {
-  return {
-    isLoggedIn: !!state.auth.id,
-  };
-};
+// const mapState = (state) => {
+//   return {
+//     isLoggedIn: !!state.auth.id,
+//   };
+// };
 
-const mapDispatch = (dispatch) => {
-  return {
-    handleClick() {
-      dispatch(logout());
-    },
-  };
-};
+// const mapDispatch = (dispatch) => {
+//   return {
+//     handleClick() {
+//       dispatch(logout());
+//     },
+//   };
+// };
 
-export default connect(mapState, mapDispatch)(Navbar);
+export default Navbar;
