@@ -19,10 +19,10 @@ const Cart = () => {
   //const itemCount = itemsInCart[0].length;
 
   //Calculate the total
-  // const total = itemsInCart.reduce(
-  //   (accum, item) => accum + (item.price || 0),
-  //   0
-  // );
+  const total = cart.reduce(
+  (accum, item) => accum + (item.price || 0),
+    0
+   );
 
   console.log(
     `itemsInCart.map`,
@@ -34,7 +34,7 @@ const Cart = () => {
       <h3>GraceFull Shopping Cart</h3>
       <h4>
         <span className="itemCount">
-          {/* There are {itemCount} items in the cart */}
+          There are {cart.length} items in the cart
         </span>
       </h4>
       <ul className="items-in-cart">
@@ -60,16 +60,16 @@ const Cart = () => {
                     {" "}
                     +{" "}
                   </button>
-                  {/* <RemoveFromCart productId={item.id} /> */}
+                  <RemoveFromCart product={item} />
                 </div>
               );
             })}
       </ul>
       <div className="cartSummary">
         <ul>
-          {/* <li>
+          <li>
             Total <span> ${total}</span>
-          </li> */}
+          </li>
           <button>Checkout</button>
         </ul>
       </div>
