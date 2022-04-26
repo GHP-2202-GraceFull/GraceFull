@@ -200,6 +200,24 @@ nav hr {
   background-color: #f4c970;
 }
 
+/* ALL PRODUCTS */
+
+#products-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+#all-products-item {
+  width: 200px;
+  height: 200px;
+}
+
+#all-products-item > img {
+  width: 200px;
+  height: 200px;
+}
+
 /* SIGN-IN / SIGN-UP */
 
 #auth-wrapper {

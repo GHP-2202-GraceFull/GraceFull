@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllProducts } from "../store/allProducts";
 import AddToCart from "./AddToCart";
+import AllProductsListItem from "./AllProductsListItem";
 
 const AllProducts = () => {
   const [sort, setSort] = useState(null);
@@ -13,7 +14,6 @@ const AllProducts = () => {
   });
 
   useEffect(() => {
-    console.log("inside useEffect in all products");
     dispatch(fetchAllProducts());
   }, []);
 
@@ -47,15 +47,11 @@ const AllProducts = () => {
           <option value="smoothie">Smoothies</option>
         </select>
       </label>
-      {products.map((product) => (
-        <div key={product.id}>
-          <h3>{product.title}</h3>
-          <h3>${product.price}</h3>
-          <AddToCart product={product} />
-          <img src={product.imageUrl} />
-          <Link to={`/products/${product.id}`}>More Info</Link>
-        </div>
-      ))}
+      <div id="products-list">
+        {products.map((product) => (
+          <AllProductsListItem product={product} key={product.id} />
+        ))}
+      </div>
     </div>
   );
 };
