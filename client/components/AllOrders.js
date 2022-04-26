@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setOrders } from "../store/orders";
 
@@ -15,17 +16,19 @@ const AllOrders = () => {
     dispatch(setOrders());
   }, []);
 
-  console.log("Orders from the AllOrders Component:", orders); // TODO: remove console.log
+  console.log("Orders from the AllOrders Component:", orders); // ToDo: remove console.log
 
   return (
-    <div>
+    <div key>
       <h2>Your Orders</h2>
-      <div>
-        <h2>In Progress</h2>
-      </div>
-      <div>
-        <h2>Completed</h2>
-      </div>
+      {orders.map((order) => {
+        return (
+        <div key={order.id}>
+          <li>Order number: {order.id}</li>
+          <li>Order status: {order.status}</li>
+        </div>
+        );
+      })}
     </div>
   );
 };
