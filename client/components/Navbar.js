@@ -66,21 +66,4 @@ const Navbar = () => {
   );
 };
 
-/**
- * CONTAINER
- */
-// const mapState = (state) => {
-//   return {
-//     isLoggedIn: !!state.auth.id,
-//   };
-// };
-
-// const mapDispatch = (dispatch) => {
-//   return {
-//     handleClick() {
-//       dispatch(logout());
-//     },
-//   };
-// };
-
 export default Navbar;

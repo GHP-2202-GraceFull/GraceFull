@@ -6,6 +6,7 @@ import auth from "./auth";
 import allProducts from "./allProducts";
 import singleProductReducer from "./singleProduct";
 import cartReducer from "./cart";
+import categoriesReducer from "./categories";
 import checkoutCart from './checkout'
 
 //App Reducer
@@ -14,6 +15,7 @@ const reducer = combineReducers({
   allProducts,
   singleProduct: singleProductReducer,
   cartReducer,
+  categories: categoriesReducer,
   checkoutCart,
 });
 
