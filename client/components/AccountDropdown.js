@@ -6,6 +6,7 @@ import { logout } from "../store";
 const AccountDropdown = ({ visible }) => {
   const dispatch = useDispatch();
   const isAdmin = useSelector((state) => state.auth.admin);
+  console.log(isAdmin, "isAdmin");
   return (
     <div id={visible ? "visible-dropdown" : "hidden-dropdown"}>
       <div id="dropdown-container">
