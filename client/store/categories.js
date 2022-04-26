@@ -3,6 +3,7 @@ import Axios from "axios";
 //ACTION TYPES
 const ADD_CATEGORY = "ADD_CATEGORY";
 const GET_CATEGORIES = "GET_CATEGORIES";
+const REMOVE_CATEGORY = "REMOVE_CATEGORY";
 
 //ACTION CREATORS
 const addCategory = (category) => {
@@ -19,6 +20,13 @@ const getCategories = (categories) => {
   };
 };
 
+const _deleteCategory = (categoryId) => {
+  return {
+    type: REMOVE_CATEGORY,
+    categoryId,
+  };
+};
+
 //THUNKS
 export const fetchCategories = () => {
   return async (dispatch) => {
@@ -26,10 +34,19 @@ export const fetchCategories = () => {
     dispatch(getCategories(categories));
   };
 };
-export const postCategory = () => {
+export const postCategory = (category) => {
   return async (dispatch) => {
-    const { data: category } = await Axios.post("/api/categories", category);
-    dispatch(addCategory(category));
+    const { data: newCategory } = await Axios.post("/api/categories", category);
+    dispatch(addCategory(newCategory));
+    dispatch(fetchCategories());
+  };
+};
+//TODO: add remove category to reducer or is that an unecessary step if we reload all categories once category is deleted form DB?
+export const deleteCategory = (categoryId) => {
+  return async (dispatch) => {
+    const deletedCategory = await Axios.delete(`api/categories/${categoryId}`);
+    dispatch(_deleteCategory(deletedCategory.id));
+    dispatch(fetchCategories());
   };
 };
 
@@ -40,6 +57,8 @@ export default function categoriesReducer(categories = [], action) {
       return action.categories;
     case ADD_CATEGORY:
       return [...categories, action.category];
+    case REMOVE_CATEGORY:
+      return categories.filter((category) => category.id !== action.categoryId);
     default:
       return categories;
   }

@@ -1,6 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCategories } from "../../store/categories";
+import {
+  fetchCategories,
+  postCategory,
+  deleteCategory,
+} from "../../store/categories";
 import { Chip } from "@material-ui/core";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 
@@ -10,12 +14,14 @@ const AddCategory = () => {
     dispatch(fetchCategories());
   }, []);
   const categories = useSelector((state) => state.categories);
+  const [input, editInput] = useState("");
   return (
     <div id="category-container">
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          console.log("submit new category clicked");
+          dispatch(postCategory({ name: input }));
+          editInput("");
         }}
       >
         <div id="add-header">
@@ -25,13 +31,19 @@ const AddCategory = () => {
           </button>
         </div>
         <label htmlFor="name">Category Name:</label>
-        <input name="name" type="text" className="product-input"></input>
+        <input
+          name="name"
+          type="text"
+          className="product-input"
+          value={input}
+          onChange={(event) => editInput(event.target.value)}
+        ></input>
       </form>
       <div id="category-chips">
         {categories.map((category) => (
           <Chip
             key={category.id}
-            onDelete={() => console.log("clicked delete")}
+            onDelete={() => dispatch(deleteCategory(category.id))}
             label={
               category.name.charAt(0).toUpperCase() + category.name.slice(1)
             }

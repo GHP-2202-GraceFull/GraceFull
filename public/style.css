@@ -390,7 +390,8 @@ form div {
 #category-chips {
   display: flex;
   flex-wrap: wrap;
-  margin: 10px 0;
+  gap: 10px;
+  margin-top: 10px;
 }
 
 #category-chips > div {

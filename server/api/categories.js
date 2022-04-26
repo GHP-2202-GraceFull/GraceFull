@@ -23,4 +23,15 @@ router.post("/", async (req, res, next) => {
   }
 });
 
+router.delete("/:id", async (req, res, next) => {
+  try {
+    const deletedCategory = await Category.destroy({
+      where: { id: req.params.id },
+    });
+    res.sendStatus(204).send(deletedCategory);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
