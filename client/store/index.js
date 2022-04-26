@@ -5,9 +5,9 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import auth from "./auth";
 import allProducts from "./allProducts";
 import singleProductReducer from "./singleProduct";
-//import addToCartReducer from "./addToCart";
 import cartReducer from "./cart";
 import categoriesReducer from "./categories";
+import checkoutCart from './checkout'
 
 //App Reducer
 const reducer = combineReducers({
@@ -16,6 +16,7 @@ const reducer = combineReducers({
   singleProduct: singleProductReducer,
   cartReducer,
   categories: categoriesReducer,
+  checkoutCart,
 });
 
 //Middleware

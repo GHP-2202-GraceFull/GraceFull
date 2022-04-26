@@ -368,6 +368,7 @@ form div {
 
 #admin-product-options .product-input {
   height: 30px;
+  width: 100%;
 }
 
 #admin-product-options textarea {
@@ -414,4 +415,7 @@ form div {
 
 #category-chips > div {
   margin-right: 10px;
+}
+input {
+  width: 250px;
 }
