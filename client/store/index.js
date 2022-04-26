@@ -7,6 +7,7 @@ import allProducts from "./allProducts";
 import singleProductReducer from "./singleProduct";
 //import addToCartReducer from "./addToCart";
 import cartReducer from "./cart";
+import categoriesReducer from "./categories";
 
 //App Reducer
 const reducer = combineReducers({
@@ -14,6 +15,7 @@ const reducer = combineReducers({
   allProducts,
   singleProduct: singleProductReducer,
   cartReducer,
+  categories: categoriesReducer,
 });
 
 //Middleware
