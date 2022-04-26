@@ -1,3 +1,8 @@
+// pulling the models to build cart
+const Order = require("./Order");
+const LineItem = require("./Lineitem");
+const Product = require("./Product");
+
 module.exports = (User, db) => {
   User.prototype.getCart = async function () {
     // finding the cart for the specific userId in the user model
@@ -5,11 +10,6 @@ module.exports = (User, db) => {
       userId: this.id,
       status: "CART",
     };
-
-    // pulling the models to build cart
-    const Order = db.models.Order;
-    const LineItem = db.models.LineItem;
-    const Product = db.models.product;
 
     //builidng cart
     let cart = await Order.findOne({
@@ -22,14 +22,14 @@ module.exports = (User, db) => {
       cart = await Order.create(where);
     }
 
-    return Order.findByPk(cart.id, {
+    return await Order.findByPk(cart.id, {
       include: [{ model: LineItem, include: [Product] }],
     });
   };
 
   User.prototype.removeFromCart = async function (product) {
     const cart = await this.getCart();
-    const lineItem = cart.lineItems.find(
+    const lineItem = cart.dataValues.lineitems.find(
       (lineItem) => lineItem.productId === product.id
     );
     lineItem.quantity--;
@@ -43,18 +43,38 @@ module.exports = (User, db) => {
 
   User.prototype.addToCart = async function (product) {
     const cart = await this.getCart();
-    const lineItem = cart.lineItems.find(
+    const lineItem = cart.dataValues.lineitems.find(
       (lineItem) => lineItem.productId === product.id
     );
     if (lineItem) {
       lineItem.quantity++;
       await lineItem.save();
     } else {
-      await db.models.lineItem.create({
+      await LineItem.create({
         productId: product.id,
         orderId: cart.id,
       });
     }
+    return this.getCart();
+  };
+
+  User.prototype.checkoutCart = async function (data) {
+    const cart = await this.getCart();
+    cart.status = "ORDER"
+    await cart.update(data)
+    await cart.save()
+  };
+
+  User.prototype.removeAllFromCart = async function (product) {
+    const cart = await this.getCart();
+    const lineItem = cart.dataValues.lineitems.find(
+      (lineItem) => lineItem.productId === product.product.id
+    );
+
+    if (lineItem) {
+      await lineItem.destroy();
+    }
+
     return this.getCart();
   };
 };

@@ -1,50 +1,69 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useState } from "react";
+import { connect, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { logout } from "../store";
+import { useEffect } from "react";
+import { setCart } from "../store/cart";
+import { FiShoppingCart } from "react-icons/fi";
+import { MdOutlineExpandMore } from "react-icons/md";
 
-const Navbar = ({ handleClick, isLoggedIn }) => (
-  <div>
-    <h1>GraceFull</h1>
-    <nav>
-      {isLoggedIn ? (
-        <div>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
+import AccountDropdown from "./AccountDropdown";
+
+const Navbar = () => {
+  const [dropdown, setDropdown] = useState(false);
+  const user = useSelector((state) => state.auth.username);
+  const cart = useSelector((state) => state.cartReducer);
+  const totalCartCount = cart.reduce(
+    (accum, item) => accum + (item.quantity || 0),
+    0
+  );
+  //TODO: BUG -> when a user signs up and logs back in, dropdown remembers state of 'true'
+  const isLoggedIn = useSelector((state) => !!state.auth.id);
+  return (
+    <div>
+      <nav>
+        <div id="nav-logo">
+          <Link to="/">
+            ✻ Grace<i>Full</i>
+          </Link>
         </div>
-      ) : (
-        <div>
-          {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-          <Link to='/products'>Products</Link>
-          <Link to='/cart'>Cart</Link>
+        <div className="nav-links">
+          {/* Checkout link for testing. TODO: Remove once cart is fully functioning */}
+          <div>
+            <Link to="/checkout">Checkout</Link>
+          </div>
+          <div>
+            <Link to="/products">Products</Link>
+          </div>
 
+          {isLoggedIn ? (
+            <>
+              <div>
+                Welcome, {user}
+                <div id="expand-account" onClick={() => setDropdown(!dropdown)}>
+                  {/*TODO: Clean up ternerary for classname - can't figure out how to make a simple conditional within the component props*/}
+                  <MdOutlineExpandMore
+                    size={24}
+                    className={dropdown ? "flip-vertical" : ""}
+                  />
+                </div>
+              </div>
+              <AccountDropdown visible={dropdown} />
+            </>
+          ) : (
+            <div>
+              <Link to="/login">Sign In</Link>
+            </div>
+          )}
+          <div>
+            <span>{totalCartCount}</span>
+            <Link to="/cart">
+              <FiShoppingCart size={24} />
+            </Link>
+          </div>
         </div>
-      )}
-    </nav>
-    <hr />
-  </div>
-);
-
-/**
- * CONTAINER
- */
-const mapState = (state) => {
-  return {
-    isLoggedIn: !!state.auth.id,
-  };
+      </nav>
+    </div>
+  );
 };
 
-const mapDispatch = (dispatch) => {
-  return {
-    handleClick() {
-      dispatch(logout());
-    },
-  };
-};
-
-export default connect(mapState, mapDispatch)(Navbar);
+export default Navbar;
