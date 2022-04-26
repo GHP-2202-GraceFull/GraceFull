@@ -29,11 +29,16 @@ export const fetchAllProducts = () => {
   };
 };
 
-export const addProduct = (product) => {
+export const addProduct = (product, categories) => {
   return async (dispatch) => {
-    const response = await axios.post("/api/products", product);
+    if (product.imageUrl === "") {
+      delete product.imageUrl;
+    }
+    const sendData = { product, categories };
+    const response = await axios.post("/api/products", sendData);
     const newProduct = response.data;
     dispatch(_addProduct(newProduct));
+    dispatch(fetchAllProducts());
   };
 };
 

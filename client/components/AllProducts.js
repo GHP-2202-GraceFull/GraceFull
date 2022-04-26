@@ -13,8 +13,11 @@ const AllProducts = () => {
   });
 
   useEffect(() => {
+    console.log("inside useEffect in all products");
     dispatch(fetchAllProducts());
   }, []);
+
+  console.log(products, "all products");
 
   sort === "lowHigh"
     ? products.sort((a, b) => a.price - b.price)
@@ -22,13 +25,9 @@ const AllProducts = () => {
     ? products.sort((a, b) => b.price - a.price)
     : null;
 
-  console.log(filter, "filter value before if statement"); // TODO: remove console.log
-
   if (filter && filter !== "") {
     products = products.filter((product) => {
-      console.log(product.categories, "product.categories");
       const categoryNames = product.categories.map((category) => category.name);
-      console.log(categoryNames);
       return categoryNames.includes(filter);
     });
   }

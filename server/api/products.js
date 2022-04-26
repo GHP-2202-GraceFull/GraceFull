@@ -5,6 +5,7 @@ const Product = require("../db/models/Product");
 //GET  /api/products
 router.get("/", async (req, res, next) => {
   try {
+    console.log("getting all products");
     const products = await Product.findAll({ include: Category });
     res.send(products);
   } catch (error) {
@@ -15,7 +16,17 @@ router.get("/", async (req, res, next) => {
 //POST /api/products
 router.post("/", async (req, res, next) => {
   try {
-    const newProduct = await Product.create(req.body);
+    const product = req.body.product,
+      categories = req.body.categories;
+    const newProduct = await Product.create(product);
+    if (categories.length) {
+      categories.map(async (category) => {
+        const dbCategory = await Category.findAll({
+          where: { name: category },
+        });
+        newProduct.addCategory(dbCategory);
+      });
+    }
     res.status(201).send(newProduct);
   } catch (error) {
     next(error);

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import AllProducts from "../AllProducts";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { useDispatch } from "react-redux";
+import { addProduct } from "../../store/allProducts";
 //TODO: replace console log with call to back end to create new product (line 17)
 //TODO: replace hardcoded categories with a map through categories from database (to handle additional categories added by admin users, line 31)
 
@@ -9,7 +10,7 @@ const AdminProducts = () => {
   const dispatch = useDispatch();
 
   const initialProduct = {
-    name: "",
+    title: "",
     description: "",
     imageUrl: "",
     stock: 0,
@@ -24,7 +25,6 @@ const AdminProducts = () => {
   };
 
   const handleCategoryChange = (event) => {
-    console.log(event, "category change event");
     if (event.target.checked) {
       editCategories([...categories, event.target.name]);
     } else {
@@ -34,8 +34,6 @@ const AdminProducts = () => {
     }
   };
 
-  console.log(product, "products object");
-  console.log(categories, "categories array");
   return (
     <div id="admin-products">
       <div id="all-products-admin">
@@ -48,7 +46,8 @@ const AdminProducts = () => {
             id="new-product"
             onSubmit={(event) => {
               event.preventDefault();
-              console.log("submit new product clicked");
+              dispatch(addProduct(product, categories));
+              editProduct(initialProduct);
             }}
           >
             <div id="add-header">
@@ -57,12 +56,13 @@ const AdminProducts = () => {
                 <AiOutlinePlusCircle size={30} />
               </button>
             </div>
-            <label htmlFor="name">Product Name:</label>
+            <label htmlFor="title">Product Name:</label>
             <input
-              name="name"
+              name="title"
               type="text"
               className="product-input"
-              value={product.name}
+              required
+              value={product.title}
               onChange={handleFormChange}
             />
             <label htmlFor="description">Description:</label>
@@ -76,6 +76,7 @@ const AdminProducts = () => {
               name="imageUrl"
               type="url"
               className="product-input"
+              required={false}
               value={product.imageUrl}
               onChange={handleFormChange}
             />
