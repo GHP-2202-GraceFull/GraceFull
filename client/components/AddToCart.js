@@ -6,7 +6,7 @@ import { addToCart } from "../store/cart";
 const AddToCart = (props) => {
   const dispatch = useDispatch();
   const product = props.product;
-  console.log("productId for addToCart", product);
+  // console.log("productId for addToCart", product);
   return (
     <button type="submit" onClick={() => dispatch(addToCart(product))}>
       Add to Cart

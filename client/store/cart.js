@@ -47,7 +47,6 @@ export const setCart = () => {
     });
     const cart = response.data;
     dispatch(_setCart(cart.lineitems));
-    console.log("THUNK set cart", cart.lineitems);
   };
 };
 
@@ -61,7 +60,6 @@ export const addToCart = (product) => {
     });
     const cart = response.data;
     dispatch(_addToCart(cart.lineitems));
-    console.log("THUNK add to cart", cart.lineitems);
   };
 };
 
@@ -76,7 +74,6 @@ export const removeFromCart = (product) => {
     console.log("PRODUCT SENT IN REMOVE FROM CART", product);
     const cart = response.data;
     dispatch(_removeFromCart(cart.lineitems));
-    console.log("THUNK car.lineitems remove from cart", cart.lineitems);
   };
 };
 
@@ -91,7 +88,6 @@ export const removeAllFromCart = (product) => {
     });
     const cart = response.data;
     dispatch(_removeAllFromCart(cart.lineitems));
-    console.log("THUNK ALL remove from cart", cart.lineitems);
   };
 };
 
@@ -99,16 +95,12 @@ export const removeAllFromCart = (product) => {
 export default function cartReducer(state = [], action) {
   switch (action.type) {
     case SET_CART:
-      console.log(`This is the SET_CART case:`, action.cart);
       return action.cart;
     case ADD_TO_CART:
-      console.log(`add action.product from cartReducer`, action.product);
       return action.product;
     case REMOVE_FROM_CART:
-      console.log(`remove action.product from cartReducer`, action.product);
       return action.product;
     case REMOVE_ALL_FROM_CART:
-      console.log(`remove ALL action.product from cartReducer`, action.cart);
       return action.product;
     default:
       return state;
