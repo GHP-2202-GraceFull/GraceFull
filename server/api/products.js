@@ -12,6 +12,16 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+//POST /api/products
+router.post("/", async (req, res, next) => {
+  try {
+    const newProduct = await Product.create(req.body);
+    res.status(201).send(newProduct);
+  } catch (error) {
+    next(error);
+  }
+});
+
 //GET /api/products/:productId
 router.get("/:productId", async (req, res, next) => {
   try {
