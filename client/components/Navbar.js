@@ -18,7 +18,6 @@ const Navbar = () => {
   );
   //TODO: BUG -> when a user signs up and logs back in, dropdown remembers state of 'true'
   const isLoggedIn = useSelector((state) => !!state.auth.id);
-  console.log(isLoggedIn, "is logged in");
   return (
     <div>
       <nav>
