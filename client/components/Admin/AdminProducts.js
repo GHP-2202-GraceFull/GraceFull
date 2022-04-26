@@ -3,6 +3,7 @@ import AllProducts from "../AllProducts";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../../store/allProducts";
+import AddCategory from "./AddCategory";
 //TODO: replace console log with call to back end to create new product (line 17)
 //TODO: replace hardcoded categories with a map through categories from database (to handle additional categories added by admin users, line 31)
 
@@ -133,6 +134,7 @@ const AdminProducts = () => {
             </fieldset>
           </form>
         </div>
+        <AddCategory />
       </div>
     </div>
   );

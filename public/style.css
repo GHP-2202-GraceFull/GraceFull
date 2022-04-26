@@ -381,3 +381,18 @@ form div {
 .fieldset > div {
   display: flex;
 }
+
+/* Categories */
+
+#category-container {
+  margin-top: 20px;
+}
+#category-chips {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px 0;
+}
+
+#category-chips > div {
+  margin-right: 10px;
+}

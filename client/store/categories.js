@@ -22,13 +22,13 @@ const getCategories = (categories) => {
 //THUNKS
 export const fetchCategories = () => {
   return async (dispatch) => {
-    const { data: categories } = await Axios.get("/categories");
+    const { data: categories } = await Axios.get("/api/categories");
     dispatch(getCategories(categories));
   };
 };
 export const postCategory = () => {
   return async (dispatch) => {
-    const { data: category } = await Axios.post("/categories", category);
+    const { data: category } = await Axios.post("/api/categories", category);
     dispatch(addCategory(category));
   };
 };
