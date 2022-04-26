@@ -15,7 +15,7 @@ const Cart = () => {
     dispatch(setCart());
   }, []); //componendDidMount bring items into state ???? DB to global store
 
-  console.log("This is the cart from cart.js", cart);
+
   // const lineItems = itemsInCart[0];
   //const itemCount = itemsInCart[0].length;
 
@@ -69,7 +69,7 @@ const Cart = () => {
           <li>
             Total <span> ${total}</span>
           </li>
-          <button>Checkout</button>
+          <a href ="/checkout">Checkout</a>
         </ul>
       </div>
     </div>

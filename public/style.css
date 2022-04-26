@@ -397,3 +397,6 @@ form div {
 #category-chips > div {
   margin-right: 10px;
 }
+input {
+  width: 250px;
+}
