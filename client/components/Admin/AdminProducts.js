@@ -1,10 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import AllProducts from "../AllProducts";
 import { AiOutlinePlusCircle } from "react-icons/ai";
+import { useDispatch } from "react-redux";
 //TODO: replace console log with call to back end to create new product (line 17)
 //TODO: replace hardcoded categories with a map through categories from database (to handle additional categories added by admin users, line 31)
 
 const AdminProducts = () => {
+  const dispatch = useDispatch();
+
+  const initialProduct = {
+    name: "",
+    description: "",
+    imageUrl: "",
+    stock: 0,
+    price: 0,
+  };
+
+  const [product, editProduct] = useState(initialProduct);
+  const [categories, editCategories] = useState([]);
+
+  const handleFormChange = (event) => {
+    editProduct({ ...product, [event.target.name]: event.target.value });
+  };
+
+  const handleCategoryChange = (event) => {
+    console.log(event, "category change event");
+    if (event.target.checked) {
+      editCategories([...categories, event.target.name]);
+    } else {
+      editCategories(
+        categories.filter((category) => category !== event.target.name)
+      );
+    }
+  };
+
+  console.log(product, "products object");
+  console.log(categories, "categories array");
   return (
     <div id="admin-products">
       <div id="all-products-admin">
@@ -13,29 +44,49 @@ const AdminProducts = () => {
       <div className="vl" />
       <div id="admin-product-options">
         <div id="new-product-container">
-          <div id="add-header">
-            <h2>Add a New Product</h2>
-            <button type="submit">
-              <AiOutlinePlusCircle size={30} />
-            </button>
-          </div>
-
           <form
             id="new-product"
-            onSubmit={() => console.log("submit new product clicked")}
+            onSubmit={(event) => {
+              event.preventDefault();
+              console.log("submit new product clicked");
+            }}
           >
+            <div id="add-header">
+              <h2>Add a New Product</h2>
+              <button type="submit">
+                <AiOutlinePlusCircle size={30} />
+              </button>
+            </div>
             <label htmlFor="name">Product Name:</label>
-            <input name="name" type="text" className="product-input" />
+            <input
+              name="name"
+              type="text"
+              className="product-input"
+              value={product.name}
+              onChange={handleFormChange}
+            />
             <label htmlFor="description">Description:</label>
-            <textarea name="description" />
+            <textarea
+              name="description"
+              value={product.description}
+              onChange={handleFormChange}
+            />
             <label htmlFor="imageUrl">Image URL:</label>
-            <input name="imageUrl" type="url" className="product-input" />
+            <input
+              name="imageUrl"
+              type="url"
+              className="product-input"
+              value={product.imageUrl}
+              onChange={handleFormChange}
+            />
             <label htmlFor="price">Price:</label>
             <input
               name="price"
               type="number"
               min={0}
               className="product-input"
+              value={product.price}
+              onChange={handleFormChange}
             />
 
             <label htmlFor="stock">Stock:</label>
@@ -44,16 +95,28 @@ const AdminProducts = () => {
               type="number"
               min={0}
               className="product-input"
+              value={product.stock}
+              onChange={handleFormChange}
             ></input>
-            <fieldset onChange={(event, value) => console.log(value)}>
+            <fieldset>
               <legend>Categories:</legend>
               <div className="fieldset">
                 <div>
-                  <input name="bowl" type="checkbox" className="checkbox" />
+                  <input
+                    name="bowl"
+                    type="checkbox"
+                    className="checkbox"
+                    onChange={handleCategoryChange}
+                  />
                   <label htmlFor="bowl">Bowl</label>
                 </div>
                 <div>
-                  <input name="smoothie" type="checkbox" className="checkbox" />
+                  <input
+                    name="smoothie"
+                    type="checkbox"
+                    className="checkbox"
+                    onChange={handleCategoryChange}
+                  />
                   <label htmlFor="smoothie">Smoothie</label>
                 </div>
                 <div>
@@ -61,6 +124,7 @@ const AdminProducts = () => {
                     name="accessory"
                     type="checkbox"
                     className="checkbox"
+                    onChange={handleCategoryChange}
                   />
                   <label htmlFor="accessory">Accessory</label>
                 </div>
