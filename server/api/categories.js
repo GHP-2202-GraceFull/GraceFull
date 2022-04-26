@@ -4,9 +4,7 @@ const Category = require("../db/models/Category");
 //GET  /api/categories
 router.get("/", async (req, res, next) => {
   try {
-    console.log("categories api route");
     const categories = await Category.findAll();
-    console.log(categories, " categories in api route");
     res.send(categories);
   } catch (error) {
     next(error);

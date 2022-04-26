@@ -17,8 +17,6 @@ const AllProducts = () => {
     dispatch(fetchAllProducts());
   }, []);
 
-  console.log(products, "all products");
-
   sort === "lowHigh"
     ? products.sort((a, b) => a.price - b.price)
     : sort === "highLow"
@@ -40,7 +38,6 @@ const AllProducts = () => {
         <select
           name="filter"
           onChange={(event) => {
-            console.log(event.target.value);
             setFilter(event.target.value);
           }}
         >
