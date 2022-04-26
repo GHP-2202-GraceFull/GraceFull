@@ -16,10 +16,10 @@ const Product = db.define("product", {
     allowNull: false,
   },
   price: {
-    type: Sequelize.FLOAT,
+    type: Sequelize.DECIMAL(10,2),
     allowNull: false,
   },
-  stock: {
+  quantity: {
     type: Sequelize.INTEGER,
     defaultValue: 0,
   },
@@ -27,7 +27,7 @@ const Product = db.define("product", {
     type: Sequelize.STRING,
     //defaults to placeholder image of a smoothie bowl
     defaultValue:
-      "https://images.unsplash.com/photo-1590301157284-ab2f8707bdc1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1035&q=80",
+      "https://ualr.edu/elearning/files/2020/10/No-Photo-Available.jpg",
     validate: {
       isUrl: true,
     },

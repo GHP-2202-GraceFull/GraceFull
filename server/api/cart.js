@@ -25,6 +25,20 @@ router.post("/", async (req, res, next) => {
   }
 });
 
+
+//PUT (checkout cart to order) /api/cart
+router.put("/", async (req, res, next) => {
+  console.log(req.body)
+  try {
+    const user = await User.findByToken(req.headers.authorization);
+    console.log('checkout put method ', req.body)
+    await user.checkoutCart(req.body); //req.body = shippingInfo 
+        res.status(204).end()
+  } catch (error) {
+    next(error);
+  }
+});
+
 // DELETE (Remove From Cart) /api/cart
 router.post("/remove", async (req, res, next) => {
   try {
@@ -50,31 +64,3 @@ router.post("/removeAll", async (req, res, next) => {
 });
 
 module.exports = router;
-
-//Team Note: We may want to consider middleware to replace const user = await....
-
-//We are still sorting out our Order model and methods
-//This would create an order from the cart (change order status from "CART" to "ORDER")
-//Need to determine routes required for authenticated users vs non authenticated users
-
-/////////////////////  (PENDING) ORDER ROUTES BELOW ///////////////////////////
-
-//POST /api/createOrder - Will we need this for unauthenticated users?
-// router.post("/createOrder", async (req, res, next) => {
-//   try {
-//     const user = await User.findByToken(req.headers.authorization);
-//     res.send(await user.createOrder()); //req.body = product
-//   } catch (error) {
-//     next(error);
-//   }
-// });
-
-//POST /api/
-// router.post("/updateOrder", async (req, res, next) => {
-//   try {
-//     const order = await Order.findByPk(????);
-//     res.send(await ???.createOrder()); //req.body = product
-//   } catch (error) {
-//     next(error);
-//   }
-// });

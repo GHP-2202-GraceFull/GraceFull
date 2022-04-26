@@ -27,6 +27,19 @@ module.exports = (User, db) => {
     });
   };
 
+  User.prototype.getAllOrders = async function () {
+    // finding the cart for the specific userId in the user model
+    const where = {
+      userId: this.id,
+      status: ["ORDER","SHIPPED"],
+    };
+
+    return await Order.findAll({
+      where,
+      include: [{ model: LineItem, include: [Product] }],
+    });
+  };
+
   User.prototype.removeFromCart = async function (product) {
     const cart = await this.getCart();
     const lineItem = cart.dataValues.lineitems.find(
@@ -58,19 +71,15 @@ module.exports = (User, db) => {
     return this.getCart();
   };
 
-  User.prototype.updateCart = async function (product) {
+  User.prototype.checkoutCart = async function (data) {
     const cart = await this.getCart();
-    const lineItem = cart.dataValues.lineitems.find(
-      (lineItem) => lineItem.productId === product.id
-    );
-    await lineItem.update({ quantity: product.quantity });
-    return this.getCart();
+    cart.status = "ORDER"
+    await cart.update(data)
+    await cart.save()
   };
 
   User.prototype.removeAllFromCart = async function (product) {
     const cart = await this.getCart();
-    console.log("PRODUCT IN USER METHODS", product);
-    console.log("CART in USER METHODS", cart);
     const lineItem = cart.dataValues.lineitems.find(
       (lineItem) => lineItem.productId === product.product.id
     );
