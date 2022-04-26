@@ -1,21 +1,32 @@
 import axios from "axios";
+const TOKEN = "token";
+
 
 
 const initialState = {
+  email: ''
 };
 
 
-//what needs to happen at checkout?
+//what needs to happen at checkout:
 //order status changed from "CART" to "PURCHASED"
 //email to user initiated on order status change
 //shipping address added to order
 //if user not logged in, user email updated from temp email to actual email
 
 
-
+const USER_EMAIL = "USER_EMAIL"
 const CHECKOUT = "CHECKOUT";
 
-//action creator
+
+//action creators
+export const _getEmail = (email) => {
+  return {
+    type: USER_EMAIL,
+    email,
+  };
+};
+
 export const _checkout = (data) => {
   return {
     type: CHECKOUT,
@@ -23,23 +34,39 @@ export const _checkout = (data) => {
   };
 };
 
-//thunks
-export const checkoutCart = (data) =>{
-  return async (dispatch) => {
-    //laurynn TODO create backend method/route
+//thunks laurynn TODO: route that sends back user email
+// export const getUser = () =>{
+//   return async (dispatch) => {
+//     const token = window.localStorage.getItem(TOKEN);
     
-  }
+//     dispatch(_getEmail(email));
+//   };
+// }
+
+export const checkoutCart = (shippingInfo) =>{
+  return async (dispatch) => {
+    const token = window.localStorage.getItem(TOKEN);
+    const response = await axios.put(`/api/cart`, shippingInfo, {
+      headers: {
+        authorization: token,
+      },
+    });
+    const cart = response.data;
+    console.log('thunk checkout data', cart)
+    dispatch(_checkout(cart));
+  };
 }
 
-//laurynn TODO create method/backend route for updating cart
-//
 
 //reducer
       export default function checkoutReducer(state = initialState, action) {
         switch (action.type){
           case CHECKOUT:
-            return action.data;
+            console.log('checkout reducer ', action.cart)
+            return {...state, cart: action.cart};
           default:
             return state;
         }
       }
+
+

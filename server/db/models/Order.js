@@ -36,3 +36,4 @@ const Order = db.define("order", {
 
 module.exports = Order;
 
+//beforeCreate = add line items to calculate order total?

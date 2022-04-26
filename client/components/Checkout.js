@@ -1,12 +1,12 @@
 import React, { useReducer, useEffect, } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { setCart, total } from "../store/cart"
-// import { checkoutCart } from "../store/checkout"
-// import user from TODO: create action creator/thunk for user info
+import { setCart } from "../store/cart"
+import { checkoutCart } from "../store/checkout"
+
+//laurynn TODO: validation for email
 
 const initialFormState = {
     //TODO: should pull user info on useEffect
-    // cartId: cart.id,
     firstName: '',
     lastName: '',
     email: '',
@@ -28,26 +28,36 @@ const formReducer = (state, action) => {
 
 const Checkout = () => {
 
-    // let cart = useSelector((state) => {
-    //     return state.cart
-    // })
-    //TODO: load cart, waiting on Cart update
-    //TODO: load line items and calculate total 
+    let cart = useSelector((state) => {
+        return state.cartReducer
+    })
 
-    // const dispatch = useDispatch();
+    const total = cart.reduce(
+        (accum, item) => accum + (item.product.price * item.quantity || 0),
+        0.00
+      );
+    
+      const totalCartCount = cart.reduce(
+        (accum, item) => accum + (item.quantity || 0),
+        0
+      );
 
-    // useEffect(()=>{
-    //     dispatch(setCart)
-    // }, [])
+    const dispatch = useDispatch();
 
-    // console.log(cart)
+    useEffect(()=>{
+        dispatch(setCart())
+    }, [])
 
 
-    //checkout grabs users cart (same setCart reducer) bring is as prop?
-    //calculates total (same total reducer) bring in as prop?
+    
     //checkout take in shipping info in a form
-    //on submit, checkout send to store shipping info
-    //thunk updates the order from CART to ORDER, add shipping info and total
+
+    //on submit, checkout sends shipping infor to store
+    //thunk sends shipping info to route, which calls user method
+    //updates the order from CART to ORDER, 
+    //add shipping info and total to order
+    //
+     //stripe info
 
     const [formState, localDispatch ] = useReducer(formReducer, initialFormState);
 
@@ -62,15 +72,14 @@ const Checkout = () => {
 
     const handleSubmit = event => {
         event.preventDefault;
-        console.log(formState)
-        // dispatch(checkoutCart(formState))
+        dispatch(checkoutCart(formState)) //laurynn TODO: should total be passed or calculated from line items in backend?
     }
 
     return (
         <div>
             <h3>Checkout</h3>
-            <h4> __ items in cart</h4>
-            <h4> total: $__ </h4>
+            <h4> {totalCartCount}  {totalCartCount === 1 ? "item in cart" : "items in cart"}</h4>
+            <h4> total: ${total.toFixed(2)} </h4>
             <a href='/cart'>Return to cart</a>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="firstName">First Name</label>

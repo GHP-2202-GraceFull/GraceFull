@@ -32,11 +32,8 @@ class Routes extends Component {
             <Route exact path="/products" component={AllProducts} />
             <Route exact path="/cart" component={Cart} />
             <Route path="/products/:id" component={SingleProduct} />
-<<<<<<< HEAD
             <Route exact path="/checkout" component={Checkout} />
-=======
             <Route path="/admin" component={AdminDash} />
->>>>>>> main
           </Switch>
         ) : (
           <Switch>

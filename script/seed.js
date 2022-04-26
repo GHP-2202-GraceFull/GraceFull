@@ -17,7 +17,7 @@ const dummyProducts = [
     description:
       "Made with bananas, strawberries, flax seeds, coconut, and garnished with orange peels. This bowl is high in protein and potassium.",
     quantity: 10,
-    price: 9.5,
+    price: 9.50,
     imageUrl:
       "https://images.unsplash.com/photo-1628697189445-642981ab7ffe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80",
   },
@@ -26,7 +26,7 @@ const dummyProducts = [
     description:
       "Made with strawberries, raspberries, bluberries and chia seeds. This bowl is the perfect blend of delicious flavors and B vitamins.",
     quantity: 15,
-    price: 8.0,
+    price: 8.00,
     imageUrl:
       "https://images.unsplash.com/photo-1621797350487-c8996f886ab1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
   },
@@ -35,7 +35,7 @@ const dummyProducts = [
     description:
       "Made with strawberries, raspberries and blueberries, and topped with dark chocolate and hazelnut crumbles for a healthy treat.",
     quantity: 2,
-    price: 8.5,
+    price: 8.50,
     imageUrl:
       "https://images.unsplash.com/photo-1592452319703-9a68b88dd26b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1035&q=80",
   },

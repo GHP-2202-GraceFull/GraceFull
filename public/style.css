@@ -327,3 +327,7 @@ input {
 .fieldset > div {
   display: flex;
 }
+
+input {
+  width: 250px;
+}
