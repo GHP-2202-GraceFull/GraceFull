@@ -27,6 +27,35 @@ module.exports = (User, db) => {
     });
   };
 
+  User.prototype.getAllOrders = async function () {
+    // finding the cart for the specific userId in the user model
+    const where = {
+      userId: this.id,
+      status: ["ORDER","SHIPPED"],
+    };
+
+    return await Order.findAll({
+      where,
+      include: [{ model: LineItem, include: [Product] }],
+    });
+  };
+
+
+  // User.prototype.getOrders = async function () {
+  //   // finding the orders for the specific userId in the user model
+  //   const where = {
+  //     userId: this.id,
+  //     status: "ORDER",
+  //   };
+  //   //builidng orders view
+  //   let orders = await Order.findAll({
+  //     where,
+  //     include: [{ model: LineItem, include: [Product] }],
+  //   });
+
+  //   return orders;
+  // };
+
   User.prototype.removeFromCart = async function (product) {
     const cart = await this.getCart();
     const lineItem = cart.dataValues.lineitems.find(

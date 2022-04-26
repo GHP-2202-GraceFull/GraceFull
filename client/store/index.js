@@ -5,8 +5,8 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import auth from "./auth";
 import allProducts from "./allProducts";
 import singleProductReducer from "./singleProduct";
-//import addToCartReducer from "./addToCart";
 import cartReducer from "./cart";
+import ordersReducer from "./orders";
 
 //App Reducer
 const reducer = combineReducers({
@@ -14,6 +14,7 @@ const reducer = combineReducers({
   allProducts,
   singleProduct: singleProductReducer,
   cartReducer,
+  ordersReducer
 });
 
 //Middleware

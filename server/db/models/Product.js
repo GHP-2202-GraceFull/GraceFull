@@ -19,7 +19,7 @@ const Product = db.define("product", {
     type: Sequelize.FLOAT,
     allowNull: false,
   },
-  stock: {
+  quantity: {
     type: Sequelize.INTEGER,
     defaultValue: 0,
   },

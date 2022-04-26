@@ -11,6 +11,7 @@ import Cart from "./components/Cart";
 import LandingPage from "./components/LandingPage";
 import { me } from "./store";
 import AdminDash from "./components/Admin/AdminDash";
+import AllOrders from "./components/AllOrders";
 /**
  * COMPONENT
  */
@@ -33,6 +34,7 @@ class Routes extends Component {
             <Route exact path="/cart" component={Cart} />
             <Route path="/products/:id" component={SingleProduct} />
             <Route path="/admin" component={AdminDash} />
+            <Route exact path="/orders" component={AllOrders} />
           </Switch>
         ) : (
           <Switch>
