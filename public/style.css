@@ -540,3 +540,39 @@ form div {
 input {
   width: 250px;
 }
+
+/* Users */
+
+#user-cards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+}
+
+#user-cards h3 {
+  text-align: center;
+  margin: 0 0 10px 0;
+  text-decoration: underline;
+}
+
+#user-cards > div {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 300px;
+}
+
+#admin {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+#user-actions {
+  display: flex;
+  gap: 5px;
+  margin: auto;
+}

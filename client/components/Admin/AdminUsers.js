@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers } from "../../store/users";
+import { Card, CardActions, CardContent } from "@material-ui/core";
 
 const AdminUsers = () => {
   const users = useSelector((state) => state.users);
@@ -10,12 +11,29 @@ const AdminUsers = () => {
   }, []);
 
   return (
-    <div>
+    <div id="user-cards">
       {users.map((user) => (
-        <div key={user.id}>
-          <div>{user.username}</div>
-          <div>{user.email}</div>
-        </div>
+        <Card key={user.id}>
+          <CardContent>
+            <div>
+              <h3>{user.username}</h3>
+            </div>
+            <div>
+              <strong>Email: </strong>
+              {user.email}
+            </div>
+            {user.admin && (
+              <div className="red" id="admin">
+                Admin
+              </div>
+            )}
+          </CardContent>
+          <CardActions id="user-actions">
+            <button>Edit</button>
+            <button>Delete</button>
+            <button>Password Reset</button>
+          </CardActions>
+        </Card>
       ))}
     </div>
   );
