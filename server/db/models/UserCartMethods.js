@@ -27,6 +27,19 @@ module.exports = (User, db) => {
     });
   };
 
+  User.prototype.getAllOrders = async function () {
+    // finding the cart for the specific userId in the user model
+    const where = {
+      userId: this.id,
+      status: ["ORDER","SHIPPED"],
+    };
+
+    return await Order.findAll({
+      where,
+      include: [{ model: LineItem, include: [Product] }],
+    });
+  };
+
   User.prototype.removeFromCart = async function (product) {
     const cart = await this.getCart();
     const lineItem = cart.dataValues.lineitems.find(
