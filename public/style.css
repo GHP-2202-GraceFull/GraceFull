@@ -260,6 +260,38 @@ nav hr {
   z-index: -1;
 }
 
+#add-to-cart {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #f4c970;
+}
+
+#add-to-cart:hover {
+  color: #6b976f;
+}
+
+.centered {
+  margin: auto;
+  position: absolute;
+  top: 70px;
+  padding: 20px;
+  color: white;
+}
+
+.centered > a {
+  color: #f4c970;
+}
+
+.centered > a:hover {
+  color: #f4c970;
+  text-decoration: underline;
+}
+
+#description {
+  font-size: 15px;
+}
+
 /* SIGN-IN / SIGN-UP */
 
 #auth-wrapper {
@@ -384,14 +416,15 @@ input:focus {
   width: 95%;
 }
 
-#admin-product-options button {
+button.invisible-button {
   background-color: transparent;
   cursor: pointer;
   border: none;
   width: auto;
   font-size: 0;
 }
-#admin-product-options button:hover {
+
+button.invisible-button:hover {
   color: #6b976f;
 }
 

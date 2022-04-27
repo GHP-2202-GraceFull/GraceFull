@@ -8,9 +8,22 @@ const AllProductsListItem = ({ product }) => {
     <div
       id="all-products-item"
       onMouseOver={() => toggleHover(true)}
-      onMouseOut={() => toggleHover(false)}
+      onMouseLeave={() => toggleHover(false)}
     >
       <div id="product-info" className={hover ? "hover" : ""}>
+        {hover && (
+          <>
+            <AddToCart product={product} view="all-products" />
+            <div className="centered">
+              <p id="description">
+                {product.description.slice(0, 170) + "..."}
+              </p>
+              <Link to={`/products/${product.id}`} id="more-info">
+                More Info {">"}
+              </Link>
+            </div>
+          </>
+        )}
         <div
           className={hover ? "short-info info-hover" : "short-info"}
           id="product-title"
@@ -23,12 +36,6 @@ const AllProductsListItem = ({ product }) => {
         >
           <h3>${product.price}</h3>
         </div>
-        {hover && (
-          <>
-            <AddToCart product={product} view="all-products" />
-            <Link to={`/products/${product.id}`}>More Info {">"}</Link>
-          </>
-        )}
       </div>
       <img src={product.imageUrl} />
     </div>

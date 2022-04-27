@@ -53,7 +53,7 @@ const AdminProducts = () => {
           >
             <div id="add-header">
               <h2>Add a New Product</h2>
-              <button type="submit">
+              <button type="submit" className="invisible-button">
                 <AiOutlinePlusCircle size={30} />
               </button>
             </div>
