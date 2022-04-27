@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUsers, putUser } from "../../store/users";
+import { deleteUser, fetchUsers, putUser } from "../../store/users";
 import { Card, CardActions, CardContent } from "@material-ui/core";
 import { MdOutlineSaveAlt } from "react-icons/md";
 
@@ -40,17 +40,7 @@ const AdminUsers = () => {
               <div>
                 <button
                   type="button"
-                  onClick={() =>
-                    console.log("password reset - not functional yet")
-                  }
-                >
-                  Password Reset
-                </button>
-              </div>
-              <div>
-                <button
-                  type="button"
-                  onClick={() => console.log("delete user")}
+                  onClick={() => dispatch(deleteUser(user.id))}
                 >
                   Delete
                 </button>
