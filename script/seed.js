@@ -59,6 +59,12 @@ async function seed() {
       password: "123",
       email: "murphy@123.com",
     }),
+    User.create({
+      username: "GraceHopper",
+      password: "123",
+      email: "gracehopper@gmail.com",
+      admin: true,
+    }),
   ]);
 
   //dummy user cart for TESTING

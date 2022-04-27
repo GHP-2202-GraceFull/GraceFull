@@ -20,10 +20,21 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.put("/:id", async(req,res,next) => {
+router.put("/:id", async (req, res, next) => {
   try {
-    const id = req.params.id;
+    const userId = req.params.id;
     const userEdits = req.body;
-    
+    const { data } = await User.update(userEdits, { where: { id: userId } });
+    res.send(data);
+  } catch (error) {
+    next(error);
   }
-})
+});
+
+router.delete("/:id", async (req, res, next) => {
+  try {
+    await User.destroy({ where: { id: req.params.id } });
+  } catch (error) {
+    next(error);
+  }
+});

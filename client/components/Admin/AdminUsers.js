@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUsers } from "../../store/users";
+import { fetchUsers, putUser } from "../../store/users";
 import { Card, CardActions, CardContent } from "@material-ui/core";
 import { MdOutlineSaveAlt } from "react-icons/md";
 
 const AdminUsers = () => {
   const users = useSelector((state) => state.users);
+  users.sort((a, b) => a.id - b.id);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchUsers({ admin: true }));
@@ -28,7 +29,10 @@ const AdminUsers = () => {
               <div>
                 <button
                   type="button"
-                  onClick={() => console.log("admin status toggle")}
+                  onClick={() => {
+                    const newStatus = !user.admin;
+                    dispatch(putUser({ ...user, admin: newStatus }));
+                  }}
                 >
                   Toggle Admin Status
                 </button>
