@@ -71,7 +71,7 @@ async function seed() {
   const [testUser1, testUser2, smoothie1, smoothie2, smoothie3] =
     await Promise.all([
       User.create({ username: "testUser1", password: "^lPppp&7Z%!8Erj+" }),
-      User.create({ username: "testUser2", password: "@fwGfF7?wadFuKErt" }),
+      User.create({ username: "testUser2", password: "@fwGfF7?swadFuKErt" }),
       Product.create({
         title: "smoothie1",
         price: "1",
