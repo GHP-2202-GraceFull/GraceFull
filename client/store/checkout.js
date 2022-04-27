@@ -4,7 +4,6 @@ const TOKEN = "token";
 
 
 const initialState = {
-  email: ''
 };
 
 
