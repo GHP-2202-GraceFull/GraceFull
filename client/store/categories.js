@@ -1,4 +1,5 @@
 import Axios from "axios";
+import { fetchAllProducts } from "./allProducts";
 
 //ACTION TYPES
 const ADD_CATEGORY = "ADD_CATEGORY";
@@ -48,6 +49,7 @@ export const deleteCategory = (categoryId) => {
     const deletedCategory = await Axios.delete(`api/categories/${categoryId}`);
     dispatch(_deleteCategory(deletedCategory.id));
     dispatch(fetchCategories());
+    dispatch(fetchAllProducts());
   };
 };
 

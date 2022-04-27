@@ -1,14 +1,20 @@
 import React, { useState } from "react";
 import AllProducts from "../AllProducts";
 import { AiOutlinePlusCircle } from "react-icons/ai";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addProduct, putProduct } from "../../store/allProducts";
 import AddCategory from "./AddCategory";
+import { useEffect } from "react";
+import { fetchCategories } from "../../store/categories";
 
 //TODO: replace hardcoded categories with a map through categories from database (to handle additional categories added by admin users, line 31)
 
 const AdminProducts = () => {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, []);
 
   const initialProduct = {
     title: "",
@@ -18,6 +24,7 @@ const AdminProducts = () => {
     price: 0,
   };
 
+  const allCategories = useSelector((state) => state.categories);
   const [product, editProduct] = useState(initialProduct);
   const [productForm, toggleProductForm] = useState("addNew");
   const [productId, setProductId] = useState(null);
@@ -123,6 +130,7 @@ const AdminProducts = () => {
               name="price"
               type="number"
               min={0}
+              step="0.01"
               className="product-input"
               value={product.price}
               onChange={handleFormChange}
@@ -140,36 +148,21 @@ const AdminProducts = () => {
             <fieldset>
               <legend>Categories:</legend>
               <div className="fieldset">
-                <div>
-                  <input
-                    name="bowl"
-                    type="checkbox"
-                    className="checkbox"
-                    checked={checkCategories("bowl")}
-                    onChange={handleCategoryChange}
-                  />
-                  <label htmlFor="bowl">Bowl</label>
-                </div>
-                <div>
-                  <input
-                    name="smoothie"
-                    type="checkbox"
-                    className="checkbox"
-                    checked={checkCategories("smoothie")}
-                    onChange={handleCategoryChange}
-                  />
-                  <label htmlFor="smoothie">Smoothie</label>
-                </div>
-                <div>
-                  <input
-                    name="accessory"
-                    type="checkbox"
-                    className="checkbox"
-                    checked={checkCategories("accessory")}
-                    onChange={handleCategoryChange}
-                  />
-                  <label htmlFor="accessory">Accessory</label>
-                </div>
+                {allCategories.map((category) => (
+                  <div>
+                    <input
+                      name={category.name}
+                      type="checkbox"
+                      className="checkbox"
+                      checked={checkCategories(category.name)}
+                      onChange={handleCategoryChange}
+                    />
+                    <label htmlFor={category.name}>
+                      {category.name.charAt(0).toUpperCase() +
+                        category.name.slice(1)}
+                    </label>
+                  </div>
+                ))}
               </div>
             </fieldset>
           </form>
