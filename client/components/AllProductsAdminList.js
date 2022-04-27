@@ -7,8 +7,6 @@ import {
 import { MdOutlineExpandMore } from "react-icons/md";
 
 const AllProductsAdminList = ({ product, changeProductForm }) => {
-  console.log(product, "product");
-
   return (
     <>
       <Accordion id="products-accordion">

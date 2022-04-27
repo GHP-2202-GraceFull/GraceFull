@@ -149,7 +149,7 @@ const AdminProducts = () => {
               <legend>Categories:</legend>
               <div className="fieldset">
                 {allCategories.map((category) => (
-                  <div>
+                  <div key={category.id}>
                     <input
                       name={category.name}
                       type="checkbox"
