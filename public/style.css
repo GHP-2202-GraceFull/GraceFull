@@ -350,6 +350,7 @@ form div {
 
 #admin-product-options .product-input {
   height: 30px;
+  width: 100%;
 }
 
 #admin-product-options textarea {

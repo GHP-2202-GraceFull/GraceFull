@@ -13,13 +13,8 @@ const Cart = () => {
 
   useEffect(() => {
     dispatch(setCart());
-  }, []); //componendDidMount bring items into state ???? DB to global store
+  }, []); 
 
-
-  // const lineItems = itemsInCart[0];
-  //const itemCount = itemsInCart[0].length;
-
-  //Calculate the total
   const total = cart.reduce(
     (accum, item) => accum + (item.product.price * item.quantity || 0),
     0

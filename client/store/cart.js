@@ -161,6 +161,7 @@ const saveCartToLocalStorage = () => {
 export default function cartReducer(state = [], action) {
   switch (action.type) {
     case SET_CART:
+      console.log(`This is the SET_CART case:`, action.cart);
       return action.cart;
     case ADD_TO_CART:
       console.log(`addToCart from cartReducer`, action.product);
@@ -172,6 +173,7 @@ export default function cartReducer(state = [], action) {
         return state;
       }
     case REMOVE_ALL_FROM_CART:
+      console.log(`remove ALL action.product from cartReducer`, action.cart);
       return action.product;
     default:
       return state;

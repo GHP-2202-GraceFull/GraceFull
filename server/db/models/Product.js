@@ -19,7 +19,7 @@ const Product = db.define("product", {
     type: Sequelize.DECIMAL(10,2),
     allowNull: false,
   },
-  stock: {
+  quantity: {
     type: Sequelize.INTEGER,
     defaultValue: 0,
   },
