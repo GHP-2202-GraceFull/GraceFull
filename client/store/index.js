@@ -7,7 +7,8 @@ import allProducts from "./allProducts";
 import singleProductReducer from "./singleProduct";
 import cartReducer from "./cart";
 import categoriesReducer from "./categories";
-import checkoutCart from './checkout'
+import checkoutCart from "./checkout";
+import usersReducer from "./users";
 
 //App Reducer
 const reducer = combineReducers({
@@ -17,6 +18,7 @@ const reducer = combineReducers({
   cartReducer,
   categories: categoriesReducer,
   checkoutCart,
+  users: usersReducer,
 });
 
 //Middleware
