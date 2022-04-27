@@ -8,7 +8,7 @@ import { setOrders } from "../store/orders";
 
 const AllOrders = () => {
   const dispatch = useDispatch();
-  let orders = useSelector((state) => {
+  const orders = useSelector((state) => {
     return state.ordersReducer;
   });
 
@@ -16,20 +16,45 @@ const AllOrders = () => {
     dispatch(setOrders());
   }, []);
 
-  console.log("Orders from the AllOrders Component:", orders); // ToDo: remove console.log
+  const ordersInProg = orders.filter((order) => order.status === "ORDER");
+  const ordersCompleted = orders.filter((order) => order.status === "SHIPPED");
+  //const createDate = new Date(order.createdAt).toString()
 
   return (
-    <div key={orders.id}>
-      <h2>Your Orders</h2>
-      {orders.map((order) => {
-        return (
-        <div key={order.id}>
-          <li>Order number: {order.id}</li>
-          <li>Order status: {order.status}</li>
+    <>
+      <div className="order-container">
+        <h2 iclassName="order-text">Order History</h2>
+        <div className="order-status-fb">
+        <h3 className="order-text">In progress</h3>
+          {ordersInProg.map((order) => {
+            return (
+              <div key={order.id}>
+              <ul className="order-li">
+                <li>Order# {order.id}</li>
+                <li>Order status: PROCESSING</li>
+                <li>Order date: {order.createdAt}</li>
+                </ul>
+              </div>
+            );
+          })}
         </div>
-        );
-      })}
-    </div>
+        <div className="order-status-fb">
+        <h3 className="order-text">Completed</h3>
+          {ordersCompleted.map((order) => {
+            return (
+              <div key={order.id}>
+              <ul className="order-li">
+                <li>Order# {order.id}</li>
+                <li>Order status: {order.status}</li>
+                <li>Order date: {order.createdAt}</li>
+                <li>Completion date: {order.updatedAt}</li>
+                </ul>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </>
   );
 };
 

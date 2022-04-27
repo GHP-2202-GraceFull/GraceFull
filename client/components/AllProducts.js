@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllProducts } from "../store/allProducts";
 import AddToCart from "./AddToCart";
+import AllProductsListItem from "./AllProductsListItem";
+import AllProductsAdminList from "./AllProductsAdminList";
 
-const AllProducts = () => {
-  const [sort, setSort] = useState(null);
+const AllProducts = ({ adminView = false, changeProductForm }) => {
+  const [sort, setSort] = useState("");
   const [filter, setFilter] = useState("");
   const dispatch = useDispatch();
   let products = useSelector((state) => {
@@ -13,15 +15,16 @@ const AllProducts = () => {
   });
 
   useEffect(() => {
-    console.log("inside useEffect in all products");
     dispatch(fetchAllProducts());
   }, []);
 
-  sort === "lowHigh"
-    ? products.sort((a, b) => a.price - b.price)
-    : sort === "highLow"
-    ? products.sort((a, b) => b.price - a.price)
-    : null;
+  if (sort === "lowHigh") {
+    products.sort((a, b) => a.price - b.price);
+  } else if (sort === "highLow") {
+    products.sort((a, b) => b.price - a.price);
+  } else if (sort === "") {
+    products.sort((a, b) => b.id - a.id);
+  }
 
   if (filter && filter !== "") {
     products = products.filter((product) => {
@@ -32,11 +35,21 @@ const AllProducts = () => {
 
   return (
     <div>
-      <button onClick={() => setSort("lowHigh")}>Price: low to high</button>
-      <button onClick={() => setSort("highLow")}>Price: high to low</button>
-      <label htmlFor="filter">
+      <div id="product-filters">
+        <select
+          name="sort"
+          value={sort}
+          onChange={(event) => {
+            setSort(event.target.value);
+          }}
+        >
+          <option value="">Price: No sort</option>
+          <option value="lowHigh">Price: Low to High</option>
+          <option value="highLow">Price: High to Low</option>
+        </select>
         <select
           name="filter"
+          value={filter}
           onChange={(event) => {
             setFilter(event.target.value);
           }}
@@ -46,16 +59,23 @@ const AllProducts = () => {
           <option value="bowl">Bowls</option>
           <option value="smoothie">Smoothies</option>
         </select>
-      </label>
-      {products.map((product) => (
-        <div key={product.id}>
-          <h3>{product.title}</h3>
-          <h3>${product.price}</h3>
-          <AddToCart product={product} />
-          <img src={product.imageUrl} />
-          <Link to={`/products/${product.id}`}>More Info</Link>
+      </div>
+
+      {adminView ? (
+        products.map((product) => (
+          <AllProductsAdminList
+            product={product}
+            key={product.id}
+            changeProductForm={changeProductForm}
+          />
+        ))
+      ) : (
+        <div id="products-list">
+          {products.map((product) => (
+            <AllProductsListItem product={product} key={product.id} />
+          ))}
         </div>
-      ))}
+      )}
     </div>
   );
 };

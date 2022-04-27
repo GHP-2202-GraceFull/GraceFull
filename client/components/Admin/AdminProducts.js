@@ -1,24 +1,33 @@
 import React, { useState } from "react";
 import AllProducts from "../AllProducts";
 import { AiOutlinePlusCircle } from "react-icons/ai";
-import { useDispatch } from "react-redux";
-import { addProduct } from "../../store/allProducts";
+import { useDispatch, useSelector } from "react-redux";
+import { addProduct, putProduct } from "../../store/allProducts";
 import AddCategory from "./AddCategory";
-//TODO: replace console log with call to back end to create new product (line 17)
+import { useEffect } from "react";
+import { fetchCategories } from "../../store/categories";
+
 //TODO: replace hardcoded categories with a map through categories from database (to handle additional categories added by admin users, line 31)
 
 const AdminProducts = () => {
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, []);
+
   const initialProduct = {
     title: "",
     description: "",
     imageUrl: "",
-    stock: 0,
+    quantity: 0,
     price: 0,
   };
 
+  const allCategories = useSelector((state) => state.categories);
   const [product, editProduct] = useState(initialProduct);
+  const [productForm, toggleProductForm] = useState("addNew");
+  const [productId, setProductId] = useState(null);
   const [categories, editCategories] = useState([]);
 
   const handleFormChange = (event) => {
@@ -35,25 +44,60 @@ const AdminProducts = () => {
     }
   };
 
+  const changeProductForm = (formState, productToEdit) => {
+    toggleProductForm(formState);
+    editProduct({
+      title: productToEdit.title,
+      description: productToEdit.description,
+      imageUrl: productToEdit.imageUrl,
+      quantity: productToEdit.quantity,
+      price: productToEdit.price,
+    });
+    setProductId(productToEdit.id);
+    const categoriesToEdit = productToEdit.categories.reduce(
+      (arr, category) => {
+        arr.push(category.name);
+        return arr;
+      },
+      []
+    );
+    editCategories(categoriesToEdit);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (productForm === "addNew") {
+      dispatch(addProduct(product, categories));
+    } else if (productForm === "edit") {
+      dispatch(putProduct(product, productId, categories));
+    }
+    editProduct(initialProduct);
+    setProductId(null);
+    editCategories([]);
+    toggleProductForm("addNew");
+  };
+
+  const checkCategories = (value) => {
+    if (categories.includes(value)) return true;
+    return false;
+  };
+
   return (
-    <div id="admin-products">
+    <div id="admin-products" className="dash-view">
       <div id="all-products-admin">
-        <AllProducts adminView={true} />
+        <AllProducts adminView={true} changeProductForm={changeProductForm} />
       </div>
       <div className="vl" />
       <div id="admin-product-options">
         <div id="new-product-container">
-          <form
-            id="new-product"
-            onSubmit={(event) => {
-              event.preventDefault();
-              dispatch(addProduct(product, categories));
-              editProduct(initialProduct);
-            }}
-          >
+          <form id="new-product" onSubmit={handleSubmit}>
             <div id="add-header">
-              <h2>Add a New Product</h2>
-              <button type="submit">
+              <h2>
+                {productForm === "addNew"
+                  ? "Add a New Product"
+                  : "Edit Product"}
+              </h2>
+              <button type="submit" className="invisible-button">
                 <AiOutlinePlusCircle size={30} />
               </button>
             </div>
@@ -86,50 +130,39 @@ const AdminProducts = () => {
               name="price"
               type="number"
               min={0}
+              step="0.01"
               className="product-input"
               value={product.price}
               onChange={handleFormChange}
             />
 
-            <label htmlFor="stock">Stock:</label>
+            <label htmlFor="quantity">Quantity:</label>
             <input
-              name="stock"
+              name="quantity"
               type="number"
               min={0}
               className="product-input"
-              value={product.stock}
+              value={product.quantity}
               onChange={handleFormChange}
             ></input>
             <fieldset>
               <legend>Categories:</legend>
               <div className="fieldset">
-                <div>
-                  <input
-                    name="bowl"
-                    type="checkbox"
-                    className="checkbox"
-                    onChange={handleCategoryChange}
-                  />
-                  <label htmlFor="bowl">Bowl</label>
-                </div>
-                <div>
-                  <input
-                    name="smoothie"
-                    type="checkbox"
-                    className="checkbox"
-                    onChange={handleCategoryChange}
-                  />
-                  <label htmlFor="smoothie">Smoothie</label>
-                </div>
-                <div>
-                  <input
-                    name="accessory"
-                    type="checkbox"
-                    className="checkbox"
-                    onChange={handleCategoryChange}
-                  />
-                  <label htmlFor="accessory">Accessory</label>
-                </div>
+                {allCategories.map((category) => (
+                  <div key={category.id}>
+                    <input
+                      name={category.name}
+                      type="checkbox"
+                      className="checkbox"
+                      checked={checkCategories(category.name)}
+                      onChange={handleCategoryChange}
+                    />
+                    <label htmlFor={category.name}>
+                      {category.name.charAt(0).toUpperCase() +
+                        category.name.slice(1)}
+                    </label>
+                  </div>
+                ))}
               </div>
             </fieldset>
           </form>

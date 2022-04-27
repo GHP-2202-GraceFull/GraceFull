@@ -22,9 +22,7 @@ export const setOrders = () => {
       },
     });
     const orders = response.data;
-    console.log("before dispatch in THUNK set orders", orders);
     dispatch(_setOrders(orders));
-    console.log("Afer dispatch THUNK set orders", orders);
   };
 };
 
@@ -32,8 +30,7 @@ export const setOrders = () => {
 export default function ordersReducer(state = [], action) {
   switch (action.type) {
     case SET_ORDERS:
-      console.log(`This is the SET_ORDERS case:`, action.orders);
-      return [...state, action.orders];
+      return action.orders;
     default:
       return state;
   }

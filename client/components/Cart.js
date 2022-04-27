@@ -13,7 +13,7 @@ const Cart = () => {
 
   useEffect(() => {
     dispatch(setCart());
-  }, []); //componendDidMount bring items into state ???? DB to global store
+  }, []);
 
 
   // const lineItems = itemsInCart[0];
@@ -40,7 +40,7 @@ const Cart = () => {
       </h4>
       <ul className="items-in-cart">
         {cart.length === 0
-          ? "Loading..."
+          ? "Your cart is empty"
           : cart.map((item) => {
               return (
                 <div key={item.id}>

@@ -1,12 +1,9 @@
-/* global describe beforeEach afterEach it */
-
 import { expect } from "chai";
-import { me, logout } from "./auth";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import configureMockStore from "redux-mock-store";
 import thunkMiddleware from "redux-thunk";
-import history from "../history";
+import { setCart } from "./cart";
 
 const middlewares = [thunkMiddleware];
 const mockStore = configureMockStore(middlewares);
@@ -15,7 +12,7 @@ describe("thunk creators", () => {
   let store;
   let mockAxios;
 
-  const initialState = { user: {} };
+  const initialState = { cart: [] };
 
   beforeEach(() => {
     //no browser available, we need to stub out localStorage
@@ -37,7 +34,7 @@ describe("thunk creators", () => {
     store.clearActions();
   });
 
-  describe("me", () => {
+  describe("cart", () => {
     describe("with valid token", () => {
       beforeEach(() => {
         global.window = {
@@ -50,13 +47,12 @@ describe("thunk creators", () => {
           },
         };
       });
-      it("eventually dispatches the SET_AUTH action", async () => {
-        const fakeUser = { username: "Cody" };
-        mockAxios.onGet("/auth/me").replyOnce(200, fakeUser);
-        await store.dispatch(me());
+      it("eventually dispatches the SET_CART action", async () => {
+        const fakeUser = { username: "Cody", password: 123 };
+        mockAxios.onGet("/api/cart").replyOnce(200, fakeUser);
+        await store.dispatch(setCart());
         const actions = store.getActions();
-        expect(actions[0].type).to.be.equal("SET_AUTH");
-        expect(actions[0].auth).to.be.deep.equal(fakeUser);
+        expect(actions[0].type).to.be.equal("SET_CART");
       });
     });
     describe("without valid token", () => {
@@ -69,23 +65,11 @@ describe("thunk creators", () => {
           },
         };
       });
-      it("does not dispatch GET USER action", async () => {
-        const fakeUser = { username: "Cody" };
-        mockAxios.onGet("/auth/me").replyOnce(200, fakeUser);
-        await store.dispatch(me());
-        const actions = store.getActions();
-        expect(actions.length).to.equal(0);
+      it("dispatches GET CART state and gets empty cart", async () => {
+        mockAxios.onGet("/api/cart").replyOnce(401);
+        const state = store.getState();
+        expect(state.cart).to.deep.equal([]);
       });
-    });
-  });
-
-  describe("logout", () => {
-    it("logout: eventually dispatches the SET_AUTH action withan empty object", async () => {
-      mockAxios.onPost("/auth/logout").replyOnce(204);
-      await store.dispatch(logout());
-      const actions = store.getActions();
-      expect(actions[0].type).to.be.equal("SET_AUTH");
-      expect(history.location.pathname).to.be.equal("/");
     });
   });
 });

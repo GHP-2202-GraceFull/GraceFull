@@ -3,6 +3,7 @@ import axios from "axios";
 //ACTION TYPES
 const ALL_PRODUCTS = "ALL_PRODUCTS";
 const ADD_PRODUCT = "ADD_PRODUCT";
+const EDIT_PRODUCT = "EDIT_PRODUCT";
 
 //ACTION CREATOR
 export const setProducts = (products) => {
@@ -15,6 +16,13 @@ export const setProducts = (products) => {
 const _addProduct = (product) => {
   return {
     type: ADD_PRODUCT,
+    product,
+  };
+};
+
+const editProduct = (product) => {
+  return {
+    type: EDIT_PRODUCT,
     product,
   };
 };
@@ -37,7 +45,17 @@ export const addProduct = (product, categories) => {
     const sendData = { product, categories };
     const response = await axios.post("/api/products", sendData);
     const newProduct = response.data;
-    dispatch(_addProduct(newProduct));
+    dispatch(fetchAllProducts());
+  };
+};
+
+export const putProduct = (product, id, categories) => {
+  return async (dispatch) => {
+    const sendData = { product, categories };
+    const { data: editedProduct } = await axios.put(
+      `/api/products/${id}`,
+      sendData
+    );
     dispatch(fetchAllProducts());
   };
 };
@@ -49,6 +67,11 @@ export default function productsReducer(state = [], action) {
       return action.products;
     case ADD_PRODUCT:
       return [...state, action.product];
+    case EDIT_PRODUCT:
+      //TODO: check logic? return same products except for newly edited product, then return edited product object
+      return state.map((product) =>
+        product.id === action.product.id ? action.product : product
+      );
     default:
       return state;
   }
