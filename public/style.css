@@ -4,6 +4,8 @@ body {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   margin: 0;
+  position: relative;
+  min-height: 100vh;
 }
 
 a {
@@ -21,14 +23,22 @@ label {
   display: block;
 }
 
+img {
+  max-width: 500px;
+}
+
 #footer {
   height: 64px;
   color: white;
   background-color: #6b976f;
   display: flex;
+  margin-top: 20px;
   font-family: "Courier New", Courier, monospace;
   justify-content: center;
   align-items: center;
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
 }
 
 .flip-vertical {
@@ -52,6 +62,10 @@ form div {
 
 .single-product-image {
   height: 300px;
+}
+
+.red {
+  color: red;
 }
 
 /* NAVBAR */
@@ -200,6 +214,105 @@ nav hr {
   background-color: #f4c970;
 }
 
+/* ALL PRODUCTS */
+
+#products-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  width: 1000px;
+  margin: auto;
+  padding-bottom: 100px;
+  gap: 20px;
+}
+
+#product-filters {
+  width: auto;
+  margin: 20px auto;
+}
+
+#product-filters > select {
+  height: 30px;
+  padding: 0px 10px;
+  margin-right: 20px;
+  font-family: "Courier New", Courier, monospace;
+}
+
+#product-info {
+  position: absolute;
+  width: 320px;
+  height: 320px;
+}
+
+.hover {
+  background-color: #00000092;
+}
+
+.short-info {
+  background-color: #00000092;
+  color: white;
+  padding: 10px;
+  position: absolute;
+  max-width: 250px;
+}
+.info-hover {
+  background: none;
+}
+
+#product-title {
+  top: 10px;
+  left: 10px;
+}
+
+#product-price {
+  right: 10px;
+  bottom: 10px;
+}
+
+.short-info h3 {
+  margin: 0;
+}
+
+#all-products-item > img {
+  width: 320px;
+  height: 320px;
+  object-fit: cover;
+  position: relative;
+  z-index: -1;
+}
+
+#add-to-cart {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #f4c970;
+}
+
+#add-to-cart:hover {
+  color: #6b976f;
+}
+
+.centered {
+  margin: auto;
+  position: absolute;
+  top: 70px;
+  padding: 20px;
+  color: white;
+}
+
+.centered > a {
+  color: #f4c970;
+}
+
+.centered > a:hover {
+  color: #f4c970;
+  text-decoration: underline;
+}
+
+#description {
+  font-size: 15px;
+}
+
 /* SIGN-IN / SIGN-UP */
 
 #auth-wrapper {
@@ -296,13 +409,16 @@ input:focus {
   overflow: hidden;
 }
 
-#admin-products {
+.dash-view {
   display: flex;
   flex-direction: row;
-  height: calc(100% - 48px);
   width: 100%;
   /* padding: 0 2%; */
   justify-content: space-evenly;
+}
+
+#admin-products {
+  height: calc(100% - 48px);
 }
 
 #all-products-admin {
@@ -311,6 +427,31 @@ input:focus {
 
   overflow-y: auto;
   overflow-x: hidden;
+}
+
+#products-accordion {
+  width: 100%;
+}
+
+#products-accordion > div {
+  padding: 0;
+}
+
+#accordion-image > img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+#accordion-text {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#accordion-text button {
+  width: 100px;
 }
 
 #admin-product-options {
@@ -324,14 +465,15 @@ input:focus {
   width: 95%;
 }
 
-#admin-product-options button {
+button.invisible-button {
   background-color: transparent;
   cursor: pointer;
   border: none;
   width: auto;
   font-size: 0;
 }
-#admin-product-options button:hover {
+
+button.invisible-button:hover {
   color: #6b976f;
 }
 
@@ -400,4 +542,54 @@ form div {
 }
 input {
   width: 250px;
+}
+
+/* Users */
+
+#admin-user-view {
+  justify-content: left;
+}
+
+#user-cards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+}
+
+#user-cards h3 {
+  text-align: center;
+  margin: 0 0 10px 0;
+  text-decoration: underline;
+}
+
+#user-cards > div {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 300px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.admin {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  text-align: center;
+}
+
+#user-actions {
+  display: flex;
+  gap: 5px;
+  margin: auto;
+}
+
+#user-form-wrapper {
+  width: 25%;
 }
