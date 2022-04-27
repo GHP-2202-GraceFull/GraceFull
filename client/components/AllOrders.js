@@ -19,7 +19,7 @@ const AllOrders = () => {
   console.log("Orders from the AllOrders Component:", orders); // ToDo: remove console.log
 
   return (
-    <div key>
+    <div>
       <h2>Your Orders</h2>
       {orders.map((order) => {
         return (
