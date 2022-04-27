@@ -45,4 +45,20 @@ router.get("/:productId", async (req, res, next) => {
   }
 });
 
+//PUT /api/products/:productId
+router.put("/:productId", async (req, res, next) => {
+  console.log("made it to API route");
+  try {
+    console.log("made it to API route");
+    const productId = req.params.productId;
+    const response = await Product.update(req.body, {
+      where: { id: productId },
+    });
+    const updatedProduct = response.dataValues;
+    res.send(updatedProduct);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
