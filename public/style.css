@@ -1,5 +1,4 @@
 /* GENERAL COMPONENTS */
-
 body {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
@@ -544,6 +543,32 @@ input {
   width: 250px;
 }
 
+/* Orders */
+ul.order-li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.order-container{
+  display: flex;
+flex-direction: column;
+flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+.order-status-fb{
+
+  padding: 50px;
+  margin: 30px;
+//  border: 2px #3f3e3e solid;
+}
+
+.order-text{
+align-items: center;
+text-align: center
+=======
+
 /* Users */
 
 #admin-user-view {
@@ -592,4 +617,5 @@ input {
 
 #user-form-wrapper {
   width: 25%;
+
 }
