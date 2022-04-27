@@ -1,7 +1,7 @@
 import React, { useReducer, useEffect, } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCart } from "../store/cart"
-//import { checkoutCart } from "../store/checkout"
+import { checkoutCart } from "../store/checkout"
 
 //laurynn TODO: validation for email
 
