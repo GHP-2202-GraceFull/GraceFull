@@ -6,7 +6,7 @@ import AddToCart from "./AddToCart";
 import AllProductsListItem from "./AllProductsListItem";
 
 const AllProducts = () => {
-  const [sort, setSort] = useState(null);
+  const [sort, setSort] = useState("");
   const [filter, setFilter] = useState("");
   const dispatch = useDispatch();
   let products = useSelector((state) => {
@@ -17,11 +17,13 @@ const AllProducts = () => {
     dispatch(fetchAllProducts());
   }, []);
 
-  sort === "lowHigh"
-    ? products.sort((a, b) => a.price - b.price)
-    : sort === "highLow"
-    ? products.sort((a, b) => b.price - a.price)
-    : null;
+  if (sort === "lowHigh") {
+    products.sort((a, b) => a.price - b.price);
+  } else if (sort === "highLow") {
+    products.sort((a, b) => b.price - a.price);
+  } else if (sort === "") {
+    products.sort((a, b) => b.id - a.id);
+  }
 
   if (filter && filter !== "") {
     products = products.filter((product) => {
@@ -32,9 +34,17 @@ const AllProducts = () => {
 
   return (
     <div>
-      <button onClick={() => setSort("lowHigh")}>Price: low to high</button>
-      <button onClick={() => setSort("highLow")}>Price: high to low</button>
-      <label htmlFor="filter">
+      <div id="product-filters">
+        <select
+          name="sort"
+          onChange={(event) => {
+            setSort(event.target.value);
+          }}
+        >
+          <option value="">Price: No sort</option>
+          <option value="lowHigh">Price: Low to High</option>
+          <option value="highLow">Price: High to Low</option>
+        </select>
         <select
           name="filter"
           onChange={(event) => {
@@ -46,7 +56,8 @@ const AllProducts = () => {
           <option value="bowl">Bowls</option>
           <option value="smoothie">Smoothies</option>
         </select>
-      </label>
+      </div>
+
       <div id="products-list">
         {products.map((product) => (
           <AllProductsListItem product={product} key={product.id} />

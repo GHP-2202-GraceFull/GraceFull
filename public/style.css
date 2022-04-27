@@ -221,6 +221,18 @@ nav hr {
   gap: 20px;
 }
 
+#product-filters {
+  width: 1000px;
+  margin: 20px auto;
+}
+
+#product-filters > select {
+  height: 30px;
+  padding: 0px 10px;
+  margin-right: 20px;
+  font-family: "Courier New", Courier, monospace;
+}
+
 #product-info {
   position: absolute;
   width: 320px;
