@@ -41,7 +41,7 @@ export const postCategory = (category) => {
     dispatch(fetchCategories());
   };
 };
-//TODO: add remove category to reducer or is that an unecessary step if we reload all categories once category is deleted form DB?
+
 export const deleteCategory = (categoryId) => {
   return async (dispatch) => {
     const deletedCategory = await Axios.delete(`api/categories/${categoryId}`);
