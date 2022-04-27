@@ -16,17 +16,21 @@ router.get("/", async (req, res, next) => {
 //POST /api/products
 router.post("/", async (req, res, next) => {
   try {
-    const product = req.body.product,
-      categories = req.body.categories;
+    const product = req.body.product;
+    const categories = req.body.categories;
+    console.log(categories);
     const newProduct = await Product.create(product);
     if (categories.length) {
-      categories.map(async (category) => {
-        const dbCategory = await Category.findAll({
-          where: { name: category },
-        });
-        newProduct.addCategory(dbCategory);
-      });
+      await Promise.all(
+        categories.map(async (category) => {
+          const dbCategory = await Category.findAll({
+            where: { name: category },
+          });
+          newProduct.addCategory(dbCategory);
+        })
+      );
     }
+
     res.status(201).send(newProduct);
   } catch (error) {
     next(error);

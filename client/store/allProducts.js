@@ -45,7 +45,7 @@ export const addProduct = (product, categories) => {
     const sendData = { product, categories };
     const response = await axios.post("/api/products", sendData);
     const newProduct = response.data;
-    dispatch(_addProduct(newProduct));
+    // dispatch(_addProduct(newProduct));
     dispatch(fetchAllProducts());
   };
 };
