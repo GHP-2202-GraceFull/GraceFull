@@ -1,7 +1,9 @@
-import React, { useReducer, useEffect, } from "react";
+import React, { useReducer, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Redirect } from "react-router-dom"
 import { setCart } from "../store/cart"
 import { checkoutCart } from "../store/checkout"
+
 
 //laurynn TODO: validation for email
 
@@ -27,6 +29,8 @@ const formReducer = (state, action) => {
 
 
 const Checkout = () => {
+
+    const [submitted, setSubmitted] = useState(false)
 
     let cart = useSelector((state) => {
         return state.cartReducer
@@ -72,16 +76,17 @@ const Checkout = () => {
 
     const handleSubmit = event => {
         event.preventDefault;
-        dispatch(checkoutCart(formState)) //laurynn TODO: should total be passed or calculated from line items in backend?
+        dispatch(checkoutCart(formState)) 
+        setSubmitted(true)
     }
 
     return (
         <div>
-            <h3>Checkout</h3>
+            <h3>Confirm shipping address:</h3>
             <h4> {totalCartCount}  {totalCartCount === 1 ? "item in cart" : "items in cart"}</h4>
             <h4> total: ${total.toFixed(2)} </h4>
             <a href='/cart'>Return to cart</a>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} >
                 <label htmlFor="firstName">First Name</label>
                 <input name="firstName" onChange={handleChange} value={formState.firstName} />
 
@@ -105,8 +110,9 @@ const Checkout = () => {
                 <label htmlFor="zip">zip</label>
                 <input name="zip" onChange={handleChange} value={formState.zip} />
 
-                <button type="submit">Submit</button>
+                <button type="submit">Checkout</button>
             </form>
+            {submitted && (<Redirect to="/thankyou" />)}
         </div>
     )
 }

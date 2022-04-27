@@ -12,6 +12,8 @@ import LandingPage from "./components/LandingPage";
 import { me } from "./store";
 import AdminDash from "./components/Admin/AdminDash";
 import AllOrders from "./components/AllOrders";
+import Thankyou from "./components/Thankyou";
+import Card from "./components/Payment"
 /**
  * COMPONENT
  */
@@ -33,6 +35,7 @@ class Routes extends Component {
           <Route path="/products/:id" component={SingleProduct} />
           <Route exact path="/checkout" component={Checkout} />
           {this.props.isAdmin && <Route path="/admin" component={AdminDash} />}
+          <Route exact path ='/thankyou' component={Thankyou} />
           <Route exact path="/orders" component={AllOrders} />
         </Switch>
       </div>

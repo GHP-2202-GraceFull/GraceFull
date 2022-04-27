@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+const stripe = require(stripe)("sk_test_51KstzdB1O300sa0zm08lWU4lmbeUhmEQBJTvlfDKnpPuv4WrkIia8owGOZCrjSjXzD6AzPHdGLCnUoJIPoVo2R2i00P9IK4HCm")
 
 
 //mounted on /payment

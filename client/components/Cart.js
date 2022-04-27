@@ -15,6 +15,11 @@ const Cart = () => {
     dispatch(setCart());
   }, []);
 
+
+  // const lineItems = itemsInCart[0];
+  //const itemCount = itemsInCart[0].length;
+
+  //Calculate the total
   const total = cart.reduce(
     (accum, item) => accum + (item.product.price * item.quantity || 0),
     0

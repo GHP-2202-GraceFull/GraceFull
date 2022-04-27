@@ -34,6 +34,14 @@ const Order = db.define("order", {
   },
 });
 
+Order.afterUpdate(async (order) => {
+  if(order.status === 'ORDER'){
+    //TODO calculate lineitems
+  }
+})
+
 module.exports = Order;
 
 //beforeCreate = add line items to calculate order total?
+
+//to do

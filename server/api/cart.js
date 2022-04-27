@@ -31,7 +31,6 @@ router.put("/", async (req, res, next) => {
   console.log(req.body)
   try {
     const user = await User.findByToken(req.headers.authorization);
-    console.log('checkout put method ', req.body)
     await user.checkoutCart(req.body); //req.body = shippingInfo 
         res.status(204).end()
   } catch (error) {
