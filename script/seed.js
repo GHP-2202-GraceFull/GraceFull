@@ -56,12 +56,12 @@ async function seed() {
     User.create({ username: "cody", password: "123", email: "cody@123.com" }),
     User.create({
       username: "murphy",
-      password: "123",
+      password: "ApAcVWH3f#7kyb^?",
       email: "murphy@123.com",
     }),
     User.create({
       username: "GraceHopper",
-      password: "123",
+      password: "xF4JNB+9MPX34x-@",
       email: "gracehopper@gmail.com",
       admin: true,
     }),
@@ -70,8 +70,8 @@ async function seed() {
   //dummy user cart for TESTING
   const [testUser1, testUser2, smoothie1, smoothie2, smoothie3] =
     await Promise.all([
-      User.create({ username: "testUser1", password: "123" }),
-      User.create({ username: "testUser2", password: "123" }),
+      User.create({ username: "testUser1", password: "^lPppp&7Z%!8Erj+" }),
+      User.create({ username: "testUser2", password: "@fwGfF7?swadFuKErt" }),
       Product.create({
         title: "smoothie1",
         price: "1",
