@@ -51,7 +51,6 @@ export const checkoutCart = (shippingInfo) =>{
       },
     });
     const cart = response.data;
-    console.log('thunk checkout data', cart)
     dispatch(_checkout(cart));
   };
 }
@@ -61,7 +60,6 @@ export const checkoutCart = (shippingInfo) =>{
       export default function checkoutReducer(state = initialState, action) {
         switch (action.type){
           case CHECKOUT:
-            console.log('checkout reducer ', action.cart)
             return {...state, cart: action.cart};
           default:
             return state;

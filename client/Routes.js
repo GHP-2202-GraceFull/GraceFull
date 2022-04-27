@@ -12,6 +12,8 @@ import LandingPage from "./components/LandingPage";
 import { me } from "./store";
 import AdminDash from "./components/Admin/AdminDash";
 import AllOrders from "./components/AllOrders";
+import Thankyou from "./components/Thankyou";
+import Card from "./components/Payment"
 /**
  * COMPONENT
  */
@@ -36,6 +38,8 @@ class Routes extends Component {
             <Route exact path="/checkout" component={Checkout} />
             <Route path="/admin" component={AdminDash} />
             <Route exact path="/orders" component={AllOrders} />
+            <Route exact path ='/thankyou' component={Thankyou} />
+            <Route exact path ='/payment' component={Card} />
           </Switch>
         ) : (
           <Switch>
@@ -46,6 +50,8 @@ class Routes extends Component {
             <Route exact path="/checkout" component={Checkout} />
             <Route exact path="/cart" component={Cart} />
             <Route path="/products/:id" component={SingleProduct} />
+            <Route exact path ='/thankyou' component={Thankyou} />
+            <Route exact path ='/payment' component={Card} />
           </Switch>
         )}
       </div>
