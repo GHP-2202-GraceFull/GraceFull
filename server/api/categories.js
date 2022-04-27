@@ -14,6 +14,8 @@ router.get("/", async (req, res, next) => {
 //POST /api/categories
 router.post("/", async (req, res, next) => {
   try {
+    console.log(req, "req");
+    // console.log("creating new category with object: ", req.body);
     const newCategory = await Category.create(req.body);
     res.send(newCategory);
   } catch (error) {

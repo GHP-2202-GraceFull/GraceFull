@@ -34,6 +34,7 @@ export const fetchCategories = () => {
     dispatch(getCategories(categories));
   };
 };
+
 export const postCategory = (category) => {
   return async (dispatch) => {
     const { data: newCategory } = await Axios.post("/api/categories", category);
