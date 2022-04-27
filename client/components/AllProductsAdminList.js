@@ -19,8 +19,18 @@ const AllProductsAdminList = ({ product, changeProductForm }) => {
           </div>
           <div id="accordion-text">
             <div>{product.description}</div>
-            <div>Stock: {product.stock}</div>
-            <div>Price: {product.price}</div>
+            <div>
+              <strong>Stock:</strong> {product.stock}
+            </div>
+            <div>
+              <strong>Price:</strong> {product.price}
+            </div>
+            <div>
+              <strong>Categories: </strong>
+              {product.categories
+                .map((category) => `${category.name}`)
+                .join(", ")}
+            </div>
             <button
               type="button"
               onClick={() => changeProductForm("edit", product)}

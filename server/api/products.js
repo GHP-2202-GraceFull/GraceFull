@@ -47,14 +47,31 @@ router.get("/:productId", async (req, res, next) => {
 
 //PUT /api/products/:productId
 router.put("/:productId", async (req, res, next) => {
-  console.log("made it to API route");
   try {
-    console.log("made it to API route");
     const productId = req.params.productId;
-    const response = await Product.update(req.body, {
+    const product = req.body.product;
+    const categories = req.body.categories;
+    console.log(categories, "categories");
+    const response = await Product.update(product, {
       where: { id: productId },
+      include: Category,
     });
     const updatedProduct = response.dataValues;
+    // let newCategories = [];
+    // if (categories.length) {
+    //   newCategories = await Promise.all(
+    //     categories
+    //       .map(async (category) => {
+    //         const dbCategory = Category.findOne({
+    //           where: { name: category },
+    //         });
+    //         return dbCategory;
+    //       })
+    //       .map((category) => category.dataValues)
+    //   );
+    //   console.log(newCategories, "new cats");
+    // }
+    // console.log(newCategories, "new cats");
     res.send(updatedProduct);
   } catch (error) {
     next(error);

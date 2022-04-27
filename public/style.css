@@ -441,6 +441,16 @@ input:focus {
   margin-right: 20px;
 }
 
+#accordion-text {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#accordion-text button {
+  width: 100px;
+}
+
 #admin-product-options {
   width: 25%;
   display: flex;

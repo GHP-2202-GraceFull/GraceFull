@@ -50,11 +50,12 @@ export const addProduct = (product, categories) => {
   };
 };
 
-export const putProduct = (product, id) => {
+export const putProduct = (product, id, categories) => {
   return async (dispatch) => {
+    const sendData = { product, categories };
     const { data: editedProduct } = await axios.put(
       `/api/products/${id}`,
-      product
+      sendData
     );
     dispatch(editProduct(editedProduct));
     dispatch(fetchAllProducts());

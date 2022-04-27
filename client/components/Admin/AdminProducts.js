@@ -4,7 +4,7 @@ import { AiOutlinePlusCircle } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { addProduct, putProduct } from "../../store/allProducts";
 import AddCategory from "./AddCategory";
-//TODO: replace console log with call to back end to create new product (line 17)
+
 //TODO: replace hardcoded categories with a map through categories from database (to handle additional categories added by admin users, line 31)
 
 const AdminProducts = () => {
@@ -62,8 +62,7 @@ const AdminProducts = () => {
     if (productForm === "addNew") {
       dispatch(addProduct(product, categories));
     } else if (productForm === "edit") {
-      console.log("edit form send to backend");
-      dispatch(putProduct(product, productId));
+      dispatch(putProduct(product, productId, categories));
     }
     editProduct(initialProduct);
     setProductId(null);
@@ -72,11 +71,10 @@ const AdminProducts = () => {
   };
 
   const checkCategories = (value) => {
-    console.log("inside check categories");
     if (categories.includes(value)) return true;
     return false;
   };
-  console.log(categories, "categories");
+
   return (
     <div id="admin-products">
       <div id="all-products-admin">
