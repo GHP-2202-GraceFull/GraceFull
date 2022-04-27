@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllProducts } from "../store/allProducts";
 import AddToCart from "./AddToCart";
 import AllProductsListItem from "./AllProductsListItem";
+import AllProductsAdminList from "./AllProductsAdminList";
 
-const AllProducts = () => {
+const AllProducts = ({ adminView = false, changeProductForm }) => {
   const [sort, setSort] = useState("");
   const [filter, setFilter] = useState("");
   const dispatch = useDispatch();
@@ -60,11 +61,21 @@ const AllProducts = () => {
         </select>
       </div>
 
-      <div id="products-list">
-        {products.map((product) => (
-          <AllProductsListItem product={product} key={product.id} />
-        ))}
-      </div>
+      {adminView ? (
+        products.map((product) => (
+          <AllProductsAdminList
+            product={product}
+            key={product.id}
+            changeProductForm={changeProductForm}
+          />
+        ))
+      ) : (
+        <div id="products-list">
+          {products.map((product) => (
+            <AllProductsListItem product={product} key={product.id} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

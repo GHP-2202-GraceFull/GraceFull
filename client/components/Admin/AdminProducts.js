@@ -19,6 +19,7 @@ const AdminProducts = () => {
   };
 
   const [product, editProduct] = useState(initialProduct);
+  const [productForm, toggleProductForm] = useState("addNew");
   const [categories, editCategories] = useState([]);
 
   const handleFormChange = (event) => {
@@ -35,24 +36,59 @@ const AdminProducts = () => {
     }
   };
 
+  const changeProductForm = (formState, productToEdit) => {
+    toggleProductForm(formState);
+    editProduct({
+      title: productToEdit.title,
+      description: productToEdit.description,
+      imageUrl: productToEdit.imageUrl,
+      stock: productToEdit.stock,
+      price: productToEdit.price,
+    });
+    console.log(productToEdit.categories);
+    const categoriesToEdit = productToEdit.categories.reduce(
+      (arr, category) => {
+        arr.push(category.name);
+        return arr;
+      },
+      []
+    );
+    editCategories(categoriesToEdit);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (productForm === "addNew") {
+      dispatch(addProduct(product, categories));
+    } else if (productForm === "edit") {
+      console.log("edit form send to backend");
+      // dispatch(postProduct(product, categories))
+    }
+    editProduct(initialProduct);
+    toggleProductForm("addNew");
+  };
+
+  const checkCategories = (value) => {
+    console.log("inside check categories");
+    if (categories.includes(value)) return true;
+    return false;
+  };
+  console.log(categories, "categories");
   return (
     <div id="admin-products">
       <div id="all-products-admin">
-        <AllProducts adminView={true} />
+        <AllProducts adminView={true} changeProductForm={changeProductForm} />
       </div>
       <div className="vl" />
       <div id="admin-product-options">
         <div id="new-product-container">
-          <form
-            id="new-product"
-            onSubmit={(event) => {
-              event.preventDefault();
-              dispatch(addProduct(product, categories));
-              editProduct(initialProduct);
-            }}
-          >
+          <form id="new-product" onSubmit={handleSubmit}>
             <div id="add-header">
-              <h2>Add a New Product</h2>
+              <h2>
+                {productForm === "addNew"
+                  ? "Add a New Product"
+                  : "Edit Product"}
+              </h2>
               <button type="submit" className="invisible-button">
                 <AiOutlinePlusCircle size={30} />
               </button>
@@ -108,6 +144,7 @@ const AdminProducts = () => {
                     name="bowl"
                     type="checkbox"
                     className="checkbox"
+                    checked={checkCategories("bowl")}
                     onChange={handleCategoryChange}
                   />
                   <label htmlFor="bowl">Bowl</label>
@@ -117,6 +154,7 @@ const AdminProducts = () => {
                     name="smoothie"
                     type="checkbox"
                     className="checkbox"
+                    checked={checkCategories("smoothie")}
                     onChange={handleCategoryChange}
                   />
                   <label htmlFor="smoothie">Smoothie</label>
@@ -126,6 +164,7 @@ const AdminProducts = () => {
                     name="accessory"
                     type="checkbox"
                     className="checkbox"
+                    checked={checkCategories("accessory")}
                     onChange={handleCategoryChange}
                   />
                   <label htmlFor="accessory">Accessory</label>
