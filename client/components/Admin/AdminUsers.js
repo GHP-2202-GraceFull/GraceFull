@@ -40,7 +40,9 @@ const AdminUsers = () => {
               <div>
                 <button
                   type="button"
-                  onClick={() => console.log("password reset")}
+                  onClick={() =>
+                    console.log("password reset - not functional yet")
+                  }
                 >
                   Password Reset
                 </button>

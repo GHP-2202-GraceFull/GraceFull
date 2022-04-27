@@ -26,10 +26,10 @@ const User = db.define("user", {
     },
   },
 
-  // //TODO: take out if we don't implement the rewards program
-  // rewards: {
-  //   type: Sequelize.INTEGER,
-  // },
+  admin: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
 });
 
 require("./UserCartMethods")(User, db);

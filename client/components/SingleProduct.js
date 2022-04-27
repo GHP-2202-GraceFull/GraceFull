@@ -19,11 +19,7 @@ const SingleProduct = (props) => {
       <h1>{singleProduct.title}</h1>
       <AddToCart product={singleProduct} />
       <img src={singleProduct.imageUrl} className="single-product-image" />
-      {singleProduct.quantity === 0 ? (
-        <h4 className="sold-out">Sold Out!</h4>
-      ) : (
-        <></>
-      )}
+      {singleProduct.quantity === 0 && <h4 className="sold-out">Sold Out!</h4>}
       <p>{singleProduct.description}</p>
     </div>
   );

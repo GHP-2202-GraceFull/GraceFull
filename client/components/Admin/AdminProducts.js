@@ -14,7 +14,7 @@ const AdminProducts = () => {
     title: "",
     description: "",
     imageUrl: "",
-    stock: 0,
+    quantity: 0,
     price: 0,
   };
 
@@ -43,7 +43,7 @@ const AdminProducts = () => {
       title: productToEdit.title,
       description: productToEdit.description,
       imageUrl: productToEdit.imageUrl,
-      stock: productToEdit.stock,
+      quantity: productToEdit.quantity,
       price: productToEdit.price,
     });
     setProductId(productToEdit.id);
@@ -128,13 +128,13 @@ const AdminProducts = () => {
               onChange={handleFormChange}
             />
 
-            <label htmlFor="stock">Stock:</label>
+            <label htmlFor="quantity">Quantity:</label>
             <input
-              name="stock"
+              name="quantity"
               type="number"
               min={0}
               className="product-input"
-              value={product.stock}
+              value={product.quantity}
               onChange={handleFormChange}
             ></input>
             <fieldset>

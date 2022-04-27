@@ -3,6 +3,7 @@ import axios from "axios";
 //ACTION TYPES
 const GET_USERS = "GET_USERS";
 const UPDATE_USER = "UPDATE_USER";
+const REMOVE_USER = "REMOVE_USER";
 
 //ACTION CREATORS
 const setUsers = (users) => {
@@ -16,6 +17,13 @@ const updateUser = (user) => {
   return {
     type: UPDATE_USER,
     user,
+  };
+};
+
+const removeUser = (userId) => {
+  return {
+    type: REMOVE_USER,
+    userId,
   };
 };
 
@@ -38,6 +46,14 @@ export const putUser = (user) => {
   };
 };
 
+export const deleteUser = (userId) => {
+  return async (dispatch) => {
+    const { data: deletedUser } = await axios.delete(`/api/users/${userId}`);
+    dispatch(removeUser(deletedUser.id));
+    dispatch(fetchUsers());
+  };
+};
+
 //REDUCER
 export default function usersReducer(users = [], action) {
   switch (action.type) {
@@ -47,6 +63,8 @@ export default function usersReducer(users = [], action) {
       return users.map((user) =>
         user.id === action.user.id ? action.user : user
       );
+    case REMOVE_USER:
+      return users.filter((user) => user.id !== action.userId);
     default:
       return users;
   }

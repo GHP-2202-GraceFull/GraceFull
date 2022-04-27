@@ -11,7 +11,7 @@ const AllProductsAdminList = ({ product, changeProductForm }) => {
     <>
       <Accordion id="products-accordion">
         <AccordionSummary expandIcon={<MdOutlineExpandMore />}>
-          <span className={product.stock ? "" : "red"}>{product.title}</span>
+          <span className={product.quantity ? "" : "red"}>{product.title}</span>
         </AccordionSummary>
         <AccordionDetails>
           <div id="accordion-image">
@@ -20,7 +20,7 @@ const AllProductsAdminList = ({ product, changeProductForm }) => {
           <div id="accordion-text">
             <div>{product.description}</div>
             <div>
-              <strong>Stock:</strong> {product.stock}
+              <strong>Quantity:</strong> {product.quantity}
             </div>
             <div>
               <strong>Price:</strong> {product.price}
