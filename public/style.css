@@ -409,13 +409,16 @@ input:focus {
   overflow: hidden;
 }
 
-#admin-products {
+.dash-view {
   display: flex;
   flex-direction: row;
-  height: calc(100% - 48px);
   width: 100%;
   /* padding: 0 2%; */
   justify-content: space-evenly;
+}
+
+#admin-products {
+  height: calc(100% - 48px);
 }
 
 #all-products-admin {
@@ -543,6 +546,10 @@ input {
 
 /* Users */
 
+#admin-user-view {
+  justify-content: left;
+}
+
 #user-cards {
   display: flex;
   flex-direction: row;
@@ -565,14 +572,24 @@ input {
   width: 300px;
 }
 
-#admin {
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.admin {
   position: absolute;
   top: 10px;
   right: 10px;
+  text-align: center;
 }
 
 #user-actions {
   display: flex;
   gap: 5px;
   margin: auto;
+}
+
+#user-form-wrapper {
+  width: 25%;
 }

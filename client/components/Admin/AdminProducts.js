@@ -76,7 +76,7 @@ const AdminProducts = () => {
   };
 
   return (
-    <div id="admin-products">
+    <div id="admin-products" className="dash-view">
       <div id="all-products-admin">
         <AllProducts adminView={true} changeProductForm={changeProductForm} />
       </div>

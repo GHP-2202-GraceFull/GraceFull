@@ -51,7 +51,6 @@ router.put("/:productId", async (req, res, next) => {
     const productId = req.params.productId;
     const product = req.body.product;
     const categories = req.body.categories;
-    console.log(categories, "categories");
     const response = await Product.update(product, {
       where: { id: productId },
       include: Category,
