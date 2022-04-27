@@ -37,6 +37,7 @@ const AllProducts = () => {
       <div id="product-filters">
         <select
           name="sort"
+          value={sort}
           onChange={(event) => {
             setSort(event.target.value);
           }}
@@ -47,6 +48,7 @@ const AllProducts = () => {
         </select>
         <select
           name="filter"
+          value={filter}
           onChange={(event) => {
             setFilter(event.target.value);
           }}
