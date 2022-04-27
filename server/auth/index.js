@@ -7,9 +7,7 @@ module.exports = router;
 
 router.post("/login", async (req, res, next) => {
   try {
-    console.log("logging in");
-    const token = await User.authenticate(req.body);
-    res.send({ token });
+    res.send({ token: await User.authenticate(req.body) });
   } catch (err) {
     next(err);
   }

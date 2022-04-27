@@ -30,11 +30,6 @@ const User = db.define("user", {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
   },
-
-  //TODO: take out if we don't implement the rewards program
-  rewards: {
-    type: Sequelize.INTEGER,
-  },
 });
 
 require("./UserCartMethods")(User, db);
