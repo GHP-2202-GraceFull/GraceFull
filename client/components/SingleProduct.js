@@ -17,7 +17,7 @@ const SingleProduct = (props) => {
   return (
     <div>
       <h1>{singleProduct.title}</h1>
-      <AddToCart productId={singleProduct.id} />
+      <AddToCart product={singleProduct} />
       <img src={singleProduct.imageUrl} className="single-product-image" />
       {singleProduct.quantity === 0 ? (
         <h4 className="sold-out">Sold Out!</h4>

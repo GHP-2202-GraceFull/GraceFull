@@ -36,7 +36,7 @@ const Checkout = () => {
         (accum, item) => accum + (item.product.price * item.quantity || 0),
         0.00
       );
-    
+
       const totalCartCount = cart.reduce(
         (accum, item) => accum + (item.quantity || 0),
         0
@@ -49,12 +49,12 @@ const Checkout = () => {
     }, [])
 
 
-    
+
     //checkout take in shipping info in a form
 
     //on submit, checkout sends shipping infor to store
     //thunk sends shipping info to route, which calls user method
-    //updates the order from CART to ORDER, 
+    //updates the order from CART to ORDER,
     //add shipping info and total to order
     //
      //stripe info
