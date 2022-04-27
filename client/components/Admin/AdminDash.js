@@ -17,11 +17,11 @@ const AdminDash = () => {
       >
         <Tab label="Products" value="products" />
         <Tab label="Users" value="users" />
-        <Tab label="Orders" value="orders" />
+        {/* <Tab label="Orders" value="orders" /> */}
       </Tabs>
       {tabValue === "products" && <AdminProducts />}
       {tabValue === "users" && <AdminUsers />}
-      {tabValue === "orders" && <AdminOrders />}
+      {/* {tabValue === "orders" && <AdminOrders />} */}
     </div>
   );
 };
